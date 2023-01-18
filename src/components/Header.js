@@ -1,4 +1,4 @@
-import OG_image from '../images/restaurant_chef B.jpg';
+import OG_image from '../images/restaurant_chef_B.jpg';
 
 const Header = () => {
     return (
