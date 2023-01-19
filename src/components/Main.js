@@ -6,10 +6,11 @@ const Main = (props) => {
             <article id="slogan">
                 <h1>Little Lemon</h1>
                 <h3>Chicago</h3>
-                <p>
+                <p id="text_slogan">
                     We are a family owned Mediterranean restaurant, focused on traditional 
                     recipes served with a moderntwist.
                 </p>
+                <button id="smallButton">Reserve a table</button>
             </article>
         </main>
     );
