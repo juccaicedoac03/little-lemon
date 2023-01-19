@@ -1,38 +1,97 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400;500;600;700&display=swap');
+
+.container {
+  display: grid;
+  width: 90%;
+  max-width: 900px;
+  margin: 0 auto;
+  grid-template-areas:
+    'header nav nav nav'
+    'main main main main'
+    'footer footer footer footer';
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+h1 {
+  font-family: 'Markazi Text', serif;
+  font-weight: 500;
+  font-size: 64px;
+  color: #F4CE14;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+h2 {
+  font-family: 'Karla', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+h3 {
+  font-family: 'Markazi Text', serif;
+  font-weight: 400;
+  font-size: 40px;
+  color: #EDEFEE;
+}
+
+.header {
+  grid-area: header;
+  height: 120px;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.nav {
+  height: 120px;
+  grid-area: nav;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0 0 30px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.nav ul {
+  list-style: none;
+  width: 100%;
+}
+
+.nav ul li {
+  display: inline-block;
+  margin: 0 20px;
+}
+
+.nav ul li a {
+  text-decoration: none;
+  color: black;
+}
+
+.nav ul li:last-child {
+  margin-right: 0;
+}
+
+.main {
+  grid-area: main;
+  height: 1087px;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+#allWidth {
+  background-color: #495E57;
+  margin: 0%;
+  height: 406px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: -1;
+}
+
+#slogan {
+  width: 399px;
+  height: 326px;
+  margin-top: 32px;
+}
+
+.footer {
+  grid-area: footer;
+  background-color: brown;
 }

@@ -1,12 +1,9 @@
-import OG_image from '../images/Logo.svg';
+import Logo from '../images/Logo.svg';
 
-const Header = () => {
+const Header = (props) => {
     return (
-        <header>
-            <meta name="description" content="Little Lemon restaurant web page"/>
-            <meta name="og:title" content="Little Lemon"/>
-            <meta name="og:description" content="Little Lemon restaurant web page"/>
-            <meta name="og:image" content={OG_image}/>
+        <header className={props.className}>
+            <img src={Logo} alt="Company logo"/>
         </header>
     );
 };

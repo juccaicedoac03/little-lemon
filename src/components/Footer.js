@@ -1,6 +1,6 @@
-const Footer = () => {
+const Footer = (props) => {
     return (
-        <footer>
+        <footer className={props.className}>
             <h3>Footer</h3>
         </footer>
     );
