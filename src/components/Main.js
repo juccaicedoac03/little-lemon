@@ -32,17 +32,17 @@ const Main = (props) => {
                 <div id="allWidth">
                 </div>
                 <article id="slogan">
-                    <h1>Little Lemon</h1>
+                    <h1 id='promo_tittle'>Little Lemon</h1>
                     <h3>Chicago</h3>
                     <p id="text_slogan">
                         We are a family owned Mediterranean restaurant, focused on traditional 
-                        recipes served with a moderntwist.
+                        recipes served with a modern twist.
                     </p>
                     <button id="smallButton">Reserve a table</button>
                 </article>
                 <img src={Restaurant} alt="Restaurant"/>
             </div>
-            <div id='tittle_specials'>
+            {/*<div id='tittle_specials'>
                 <h1 id='specials'>This week specials!</h1>
                 <button id="bigButton">Online Menu</button>
             </div>
@@ -58,7 +58,7 @@ const Main = (props) => {
                     />
                     )
                 })}
-            </div>
+            </div>*/}
         </main>
     );
 };

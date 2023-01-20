@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import './styles/Mobile.css';
 import Header from './components/Header';
 import Nav from './components/Nav';
 import Main from './components/Main';
