@@ -1,17 +1,64 @@
+import Restaurant from '../images/restauranfood.jpg';
+import Salad from '../images/greeksalad.jpg';
+import Bruchetta from '../images/bruchetta.svg';
+import LemonDessert from '../images/lemondessert.jpg';
+import Card from './Card';
+
+const cards = [
+    {image: Salad,
+            alt: "Greek salad",
+            tittle: "Greek salad",
+            price: "$24.46",
+            description: "The famous greek salad of crispy lettuce, peppers, olives and our Chicago style feta cheese, garnished with crunchy garlic and rosemary croutons.",
+            },
+    {image: Bruchetta,
+        alt: "Bruchetta",
+        tittle: "Bruchetta",
+        price: "$5.99",
+        description: "Our Bruschetta is made from grilled bread that has been smeared with garlic and seasoned with salt and olive oil.",
+        },
+    {image: LemonDessert,
+        alt: "Lemon Dessert",
+        tittle: "Lemon Dessert",
+        price: "$5.00",
+        description: "This comes straight from grandma’s recipe book, every last ingredient has been sourced and is as authentic as can be imagined.",
+        }
+    ];
+
 const Main = (props) => {
     return (
         <main className={props.className}>
-            <div id="allWidth">
+            <div id='promo'>
+                <div id="allWidth">
+                </div>
+                <article id="slogan">
+                    <h1>Little Lemon</h1>
+                    <h3>Chicago</h3>
+                    <p id="text_slogan">
+                        We are a family owned Mediterranean restaurant, focused on traditional 
+                        recipes served with a moderntwist.
+                    </p>
+                    <button id="smallButton">Reserve a table</button>
+                </article>
+                <img src={Restaurant} alt="Restaurant"/>
             </div>
-            <article id="slogan">
-                <h1>Little Lemon</h1>
-                <h3>Chicago</h3>
-                <p id="text_slogan">
-                    We are a family owned Mediterranean restaurant, focused on traditional 
-                    recipes served with a moderntwist.
-                </p>
-                <button id="smallButton">Reserve a table</button>
-            </article>
+            <div id='tittle_specials'>
+                <h1 id='specials'>This week specials!</h1>
+                <button id="bigButton">Online Menu</button>
+            </div>
+            <div id='cardsContainer'>
+                {cards.map((card,index) => {
+                    return (
+                    <Card key={index}
+                        image={card.image}
+                        alt={card.alt}
+                        tittle={card.tittle}
+                        price={card.price}
+                        description={card.description}
+                    />
+                    )
+                })}
+            </div>
         </main>
     );
 };

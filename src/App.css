@@ -21,6 +21,10 @@ h1 {
   height: 60px;
 }
 
+#specials {
+  color: black;
+}
+
 h2 {
   font-family: 'Karla', sans-serif;
   font-weight: 500;
@@ -33,6 +37,27 @@ h3 {
   font-weight: 400;
   font-size: 40px;
   color: #EDEFEE;
+  margin: 0;
+}
+
+h4 {
+  font-family: 'Markazi Text', serif;
+  font-weight: 500;
+  font-size: 24px;
+  margin: 0;
+}
+
+h5 {
+  font-family: 'Karla', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  margin: 0;
+}
+
+h6 {
+  font-family: 'Karla', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
   margin: 0;
 }
 
@@ -87,6 +112,21 @@ p {
   height: 1087px;
   display: grid;
   grid-template-columns: 1fr;
+  grid-template-rows: 1fr 2fr
+}
+
+#promo {
+  display: flex;
+  justify-content: space-between;
+  height: 464px;
+}
+
+#tittle_specials {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  padding: 72px 0 52px 0;
 }
 
 #allWidth {
@@ -108,10 +148,12 @@ p {
 
 .main button {
   width: 200px;
-  height: 50px;
   background-color: #F4CE14;
   border: none;
-  border-radius: 16px;
+  font-family: 'Karla', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: black;
 }
 
 .main button:hover {
@@ -122,14 +164,32 @@ p {
 }
 
 #smallButton {
-  font-family: 'Karla', sans-serif;
-  font-weight: 700;
-  font-size: 18px;
-  color: black;
+  border-radius: 16px;
   margin: 18px 0;
+  height: 50px;
+}
+
+#bigButton {
+  border-radius: 8px;
+  margin: 18px 0;
+  height: 60px;
+}
+
+.main img {
+  width: 365px;
+  height: 416px;
+  border-radius: 16px;
+  margin: 48px 0;
+}
+
+#cardsContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  padding: 0;
 }
 
 .footer {
   grid-area: footer;
-  background-color: brown;
 }

@@ -1,0 +1,42 @@
+.cardContainer {
+    background-color: #EDEFEE;
+    height: 439.74px;
+    width: 264.67px;
+    border-radius: 16px 16px 0 0;
+}
+
+#cardImg {
+    width: 264.67px;
+    height: 186px;
+    border-radius:16px 16px 0 0;
+    margin: 0;
+}
+
+#cardContent {
+    background-color: #EDEFEE;
+    border-radius:0;
+    width: 264.67px;
+    height: 253.74px;
+}
+
+#cardContentHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px;
+}
+
+#cardPrice {
+    color: #EE9972;
+}
+
+#cardDescription {
+    color: #495E57;
+    padding: 5px 25px;
+    height: 120.29px;
+}
+
+#cardContentFooter {
+    display: flex;
+    padding: 15px 25px;
+}
