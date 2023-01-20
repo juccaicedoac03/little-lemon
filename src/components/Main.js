@@ -1,6 +1,5 @@
 import Restaurant from '../images/restauranfood.jpg';
 import Salad from '../images/greeksalad.jpg';
-import Bruchetta from '../images/bruchetta.svg';
 import LemonDessert from '../images/lemondessert.jpg';
 import Card from './Card';
 
