@@ -11,7 +11,7 @@ const cards = [
             price: "$24.46",
             description: "The famous greek salad of crispy lettuce, peppers, olives and our Chicago style feta cheese, garnished with crunchy garlic and rosemary croutons.",
             },
-    {image: Bruchetta,
+    {image: Salad,
         alt: "Bruchetta",
         tittle: "Bruchetta",
         price: "$5.99",
