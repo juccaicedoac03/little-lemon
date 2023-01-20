@@ -39,4 +39,12 @@
 #cardContentFooter {
     display: flex;
     padding: 15px 25px;
+    height: 43px;
+}
+
+#cardFooterLogo {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    padding-left: 15px;
 }

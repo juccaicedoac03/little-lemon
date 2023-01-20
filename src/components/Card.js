@@ -1,5 +1,6 @@
 import React from 'react';
 import '../styles/Card.css'
+import Cycling from '../images/Cycling.svg';
 
 const Card = (props) => {
   return (
@@ -15,6 +16,7 @@ const Card = (props) => {
         </div>
         <div id='cardContentFooter'>
           <h5>Order a delivery</h5>
+          <img id='cardFooterLogo' src={Cycling} alt='cardFooterLogo'/>
         </div>
       </div>
     </div>

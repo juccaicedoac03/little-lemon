@@ -1,7 +1,9 @@
+import Copy from '../images/copy.svg';
+
 const Footer = (props) => {
     return (
         <footer className={props.className}>
-            <h3>Footer</h3>
+            <img src={Copy} alt="Copy"/>
         </footer>
     );
 };

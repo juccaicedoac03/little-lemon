@@ -1,5 +1,6 @@
 import Restaurant from '../images/restauranfood.jpg';
 import Salad from '../images/greeksalad.jpg';
+import Bruchetta from '../images/bruchetta.jpg';
 import LemonDessert from '../images/lemondessert.jpg';
 import Card from './Card';
 
@@ -10,7 +11,7 @@ const cards = [
             price: "$24.46",
             description: "The famous greek salad of crispy lettuce, peppers, olives and our Chicago style feta cheese, garnished with crunchy garlic and rosemary croutons.",
             },
-    {image: Salad,
+    {image: Bruchetta,
         alt: "Bruchetta",
         tittle: "Bruchetta",
         price: "$5.99",
