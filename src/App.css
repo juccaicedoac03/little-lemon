@@ -115,10 +115,10 @@ p {
 }
 
 .main button:hover {
-  background-color: #f3cd10;
+  background-color: #eec80b;
 }
 .main button:active {
-  background-color: #eec80b;
+  background-color: #e4bf0a;
 }
 
 #smallButton {
