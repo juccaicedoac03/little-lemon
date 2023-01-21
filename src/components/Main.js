@@ -3,6 +3,7 @@ import Salad from '../images/greeksalad.jpg';
 import Bruchetta from '../images/bruchetta.jpg';
 import LemonDessert from '../images/lemondessert.jpg';
 import Card from './Card';
+import {useState, useEffect} from 'react';
 
 const cards = [
     {image: Salad,
@@ -26,6 +27,27 @@ const cards = [
     ];
 
 const Main = (props) => {
+
+    const [isVisible, setIsVisible] = useState(true);
+
+    const handleResize = () => {
+        if (window.innerWidth <= 600) {
+            setIsVisible(false);
+          } else {
+            setIsVisible(true);
+          }
+    };
+
+    useEffect(() => {
+        if (window.innerWidth <= 600) {
+            setIsVisible(false);
+        }
+        window.addEventListener("resize", handleResize);
+        return () => {
+          window.removeEventListener("resize", handleResize);
+        };
+    }, []);
+
     return (
         <main className={props.className}>
             <div id='promo'>
@@ -42,11 +64,11 @@ const Main = (props) => {
                 </article>
                 <img src={Restaurant} alt="Restaurant"/>
             </div>
-            {/*<div id='tittle_specials'>
+            <div id='tittle_specials'>
                 <h1 id='specials'>This week specials!</h1>
-                <button id="bigButton">Online Menu</button>
+                {isVisible && <button id="bigButton">Online Menu</button>}
             </div>
-            <div id='cardsContainer'>
+            {/*<div id='cardsContainer'>
                 {cards.map((card,index) => {
                     return (
                     <Card key={index}
