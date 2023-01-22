@@ -6,9 +6,11 @@ import Nav from './components/Nav';
 import Main from './components/Main';
 import Footer from './components/Footer';
 import Logo from './images/Logo.svg';
+import { Route,Routes } from 'react-router-dom';
 
 function App() {
   return (
+    
     <div className='container'>
       <header>
         <meta name="description" content="Little Lemon restaurant web page"/>
@@ -18,7 +20,9 @@ function App() {
       </header>
       <Header className="header"/>
       <Nav className="nav"/>
-      <Main className="main"/>
+      <Routes>
+        <Route path='/' element={<Main className="main"/>}/>
+      </Routes>
       <Footer className="footer"/>
     </div>
   );

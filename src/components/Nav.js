@@ -1,5 +1,6 @@
 import Hamburger from '../images/hamburgerMenu.svg';
 import {useState, useEffect} from 'react';
+import {Link} from 'react-router-dom';
 
 const Nav = (props) => {
 
@@ -37,12 +38,12 @@ const Nav = (props) => {
         {isClicked && (
         <nav id='menu'>
             <ul>
-                <li> <a href="/"> <h2>Home</h2> </a> </li>
-                <li> <a href="/"> <h2>About</h2> </a> </li>
-                <li> <a href="/"> <h2>Menu</h2> </a> </li>
-                <li> <a href="/"> <h2>Reservation</h2> </a> </li>
-                <li> <a href="/"> <h2>Order Online</h2> </a> </li>
-                <li> <a href="/"> <h2>Login</h2> </a> </li>
+                <li> <Link to="/"> <h2>Home</h2> </Link> </li>
+                <li> <Link to="/about"> <h2>About</h2> </Link> </li>
+                <li> <Link to="/menu"> <h2>Menu</h2> </Link> </li>
+                <li> <Link to="/reservation"> <h2>Reservation</h2> </Link> </li>
+                <li> <Link to="/order"> <h2>Order Online</h2> </Link> </li>
+                <li> <Link to="/login"> <h2>Login</h2> </Link> </li>
             </ul>
         </nav>)}
         </div>
