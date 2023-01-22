@@ -57,6 +57,7 @@
         height: 123px;
         margin: 0 auto;
         border-radius: 0%;
+        padding-top: 8px;
         border-bottom: 1px solid #EDEFEE;
         grid-template-areas:
         'description photo'

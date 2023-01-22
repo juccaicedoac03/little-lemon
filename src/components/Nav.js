@@ -4,18 +4,22 @@ import {useState, useEffect} from 'react';
 const Nav = (props) => {
 
     const [isVisible, setIsVisible] = useState(true);
+    const [isClicked, setIsClicked] = useState(false);
 
     const handleResize = () => {
         if (window.innerWidth <= 600) {
             setIsVisible(false);
+            setIsClicked(false);
           } else {
             setIsVisible(true);
+            setIsClicked(true);
           }
     };
 
     useEffect(() => {
         if (window.innerWidth <= 600) {
             setIsVisible(false);
+            setIsClicked(false);
         }
         window.addEventListener("resize", handleResize);
         return () => {
@@ -23,11 +27,15 @@ const Nav = (props) => {
         };
     }, []);
 
+    function handleClick() {
+        setIsClicked(!isClicked);
+      }
+    
     return (
         <div className={props.className}>
-        {!isVisible && <img src={Hamburger} alt="Hamburger"/>}
-        {isVisible && (
-        <nav >
+        {!isVisible && <img id='hamburguer' src={Hamburger} alt="Hamburger" onClick={handleClick}/>}
+        {isClicked && (
+        <nav id='menu'>
             <ul>
                 <li> <a href="/"> <h2>Home</h2> </a> </li>
                 <li> <a href="/"> <h2>About</h2> </a> </li>
