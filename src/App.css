@@ -80,11 +80,14 @@ p {
 }
 
 .nav {
-  height: 120px;
   grid-area: nav;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+#menu {
+  height: 120px;
   padding: 0 0 0 30px;
 }
 

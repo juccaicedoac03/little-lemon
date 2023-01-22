@@ -23,7 +23,7 @@ const cards = [
         tittle: "Lemon Dessert",
         price: "$5.00",
         description: "This comes straight from grandma’s recipe book, every last ingredient has been sourced and is as authentic as can be imagined.",
-        }
+        }  
     ];
 
 const Main = (props) => {
@@ -68,7 +68,7 @@ const Main = (props) => {
                 <h1 id='specials'>This week specials!</h1>
                 {isVisible && <button id="bigButton">Online Menu</button>}
             </div>
-            {/*<div id='cardsContainer'>
+            <div id='cardsContainer'>
                 {cards.map((card,index) => {
                     return (
                     <Card key={index}
@@ -80,7 +80,7 @@ const Main = (props) => {
                     />
                     )
                 })}
-            </div>*/}
+            </div>
         </main>
     );
 };
