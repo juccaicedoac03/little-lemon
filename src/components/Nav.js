@@ -18,6 +18,7 @@ const Nav = (props) => {
     };
 
     useEffect(() => {
+        setIsClicked(true);
         if (window.innerWidth <= 600) {
             setIsVisible(false);
             setIsClicked(false);
@@ -29,7 +30,9 @@ const Nav = (props) => {
     }, []);
 
     function handleClick() {
-        setIsClicked(!isClicked);
+        if (!isVisible){
+            setIsClicked(!isClicked);
+        }
       }
     
     return (
@@ -38,12 +41,12 @@ const Nav = (props) => {
         {isClicked && (
         <nav id='menu'>
             <ul>
-                <li> <Link to="/"> <h2>Home</h2> </Link> </li>
-                <li> <Link to="/about"> <h2>About</h2> </Link> </li>
-                <li> <Link to="/menu"> <h2>Menu</h2> </Link> </li>
-                <li> <Link to="/reservation"> <h2>Reservation</h2> </Link> </li>
-                <li> <Link to="/order"> <h2>Order Online</h2> </Link> </li>
-                <li> <Link to="/login"> <h2>Login</h2> </Link> </li>
+                <li> <Link to="/" onClick={handleClick}> <h2>Home</h2> </Link> </li>
+                <li> <Link to="/about" onClick={handleClick}> <h2>About</h2> </Link> </li>
+                <li> <Link to="/menu" onClick={handleClick}> <h2>Menu</h2> </Link> </li>
+                <li> <Link to="/reservation" onClick={handleClick}> <h2>Reservation</h2> </Link> </li>
+                <li> <Link to="/order" onClick={handleClick}> <h2>Order Online</h2> </Link> </li>
+                <li> <Link to="/login" onClick={handleClick}> <h2>Login</h2> </Link> </li>
             </ul>
         </nav>)}
         </div>
