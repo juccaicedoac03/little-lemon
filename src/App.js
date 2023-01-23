@@ -4,6 +4,7 @@ import './styles/Mobile.css';
 import Header from './components/Header';
 import Nav from './components/Nav';
 import Main from './components/Main';
+import BookingPage from './components/BookingPage';
 import Footer from './components/Footer';
 import Logo from './images/Logo.svg';
 import { Route,Routes } from 'react-router-dom';
@@ -21,6 +22,7 @@ function App() {
       <Nav className="nav"/>
       <Routes>
         <Route path='/' element={<Main className="main"/>}/>
+        <Route path='/reservation' element={<BookingPage/>}/>
       </Routes>
       <Footer className="footer"/>
     </div>
