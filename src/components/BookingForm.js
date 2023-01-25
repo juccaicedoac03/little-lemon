@@ -12,10 +12,16 @@ const BookingForm = (props) => {
         alert("Account created!"); 
     }; 
 
+    const handleDateChange = (e) => {
+        console.log(typeof(new Date(e.target.value)))
+        setDate(e.target.value)
+        props.dispatch({type: "UPDATE_TIMES", date: new Date(e.target.value)})
+    }
+
     return (
         <form onSubmit={handleSubmit} style={{display: "grid", maxWidth: "200px", gap: "20px"}}>
             <label htmlFor="res-date">Choose date</label>
-            <input type="date" id="res-date" name="res-date" value={date} required onChange={(e) => {setDate(e.target.value)}}/>
+            <input type="date" id="res-date" name="res-date" value={date} required onChange={handleDateChange}/>
             <label htmlFor="res-time">Choose time</label>
             <select id="res-time" name="res-time" value={selectedValue} required onChange={(e) => {setSelectedValue(e.target.value)}}>
                 {props.availableTimes.times.map((time,index) => {
@@ -31,7 +37,7 @@ const BookingForm = (props) => {
                 <option value="birthday">Birthday</option>
                 <option value="anniversary">Anniversary</option>
             </select>
-            <button type="submit" value="Make you reservation" onClick={()=> {props.dispatch(props.availableTimes)}}>Make you reservation</button>
+            <button type="submit" value="Make you reservation" onClick={handleSubmit}>Make you reservation</button>
         </form>
     )
 }
