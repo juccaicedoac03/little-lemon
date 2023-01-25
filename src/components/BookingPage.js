@@ -1,7 +1,7 @@
 import BookingForm from "./BookingForm"
 import { useReducer } from "react";
 
-const initializeTimes = () => {
+export const initializeTimes = () => {
     return (
         {times: [
             "17:00",
@@ -14,7 +14,7 @@ const initializeTimes = () => {
     );
 }
 
-const updateTimes = (state, action) => {
+export const updateTimes = (state, action) => {
     return state;
 }
 
