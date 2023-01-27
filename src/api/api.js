@@ -7,6 +7,25 @@ export const seededRandom = function (seed) {
     };
 };
 
+export const genTables = function (date) {
+    let min = 1;
+    let max = 15;
+
+    date = new Date();
+    let x = Array.from(date.getDate().toString(), Number).reduce((a, b) => a + b, 0);
+
+    let tables = [];
+
+    for (let i = 0; tables.length<x; i++) {
+        let randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+            if ( !tables.includes("Table "+randomNumber) ){
+                tables.push("Table "+randomNumber);
+        };
+    };
+
+    return tables;
+};
+
 export const fetchAPI = function(date) {
     let result = [];
     let random = seededRandom(date.getDate());
