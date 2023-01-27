@@ -1,10 +1,11 @@
 import BookingForm from "./BookingForm"
 import { useReducer } from "react";
-import { fetchAPI } from "../api/api";
+import { fetchAPI, genTables } from "../api/api";
 
 export const initializeTimes = () => {
     return (
-        {times: fetchAPI(new Date())}
+        {times: fetchAPI(new Date()),
+        tables: genTables(new Date())}
     );
 }
 

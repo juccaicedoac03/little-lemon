@@ -11,7 +11,6 @@ export const genTables = function (date) {
     let min = 1;
     let max = 15;
 
-    date = new Date();
     let x = Array.from(date.getDate().toString(), Number).reduce((a, b) => a + b, 0);
 
     let tables = [];
