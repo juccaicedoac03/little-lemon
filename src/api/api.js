@@ -7,7 +7,7 @@ export const seededRandom = function (seed) {
     };
 };
 
-export const genTables = function (date) {
+export const genTables = function (date, times) {
     let min = 1;
     let max = 15;
 
@@ -22,7 +22,11 @@ export const genTables = function (date) {
         };
     };
 
-    return tables;
+    let timeTables = {}
+    for (let i of times) {
+      timeTables[i] = tables;
+    }
+    return timeTables;
 };
 
 export const fetchAPI = function(date) {
