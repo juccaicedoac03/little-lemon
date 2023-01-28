@@ -34,16 +34,22 @@ export const updateTimes = (state, action) => {
 
         case "UPDATE_SELECTED_TABLE":
             const newState2 = {...state};
-            if (newState2.selectedTables[newState2.selectedDate.toLocaleDateString()]) {
-                if (newState2.selectedTables[newState2.selectedDate.toLocaleDateString()][newState2.selectedTime]) {
-                    newState2.selectedTables[newState2.selectedDate.toLocaleDateString()][newState2.selectedTime].push(action.selectedTable);
-                } else {
-                    newState2.selectedTables[newState2.selectedDate.toLocaleDateString()][newState2.selectedTime] = [action.selectedTable];
-                };
+            if (action.isSelected) {
+                const index = newState2.selectedTables[newState2.selectedDate.toLocaleDateString()][newState2.selectedTime].findIndex(item => item === action.selectedTable);
+                newState2.selectedTables[newState2.selectedDate.toLocaleDateString()][newState2.selectedTime].splice(index, 1);
+                return newState2;
             } else {
-                newState2.selectedTables[newState2.selectedDate.toLocaleDateString()] = {[newState2.selectedTime]: [action.selectedTable]};
+                if (newState2.selectedTables[newState2.selectedDate.toLocaleDateString()]) {
+                    if (newState2.selectedTables[newState2.selectedDate.toLocaleDateString()][newState2.selectedTime]) {
+                        newState2.selectedTables[newState2.selectedDate.toLocaleDateString()][newState2.selectedTime].push(action.selectedTable);
+                    } else {
+                        newState2.selectedTables[newState2.selectedDate.toLocaleDateString()][newState2.selectedTime] = [action.selectedTable];
+                    };
+                } else {
+                    newState2.selectedTables[newState2.selectedDate.toLocaleDateString()] = {[newState2.selectedTime]: [action.selectedTable]};
+                }
+                return newState2;
             }
-            return newState2;
 
         default:
             return state;
