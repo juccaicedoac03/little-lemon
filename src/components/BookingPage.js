@@ -1,7 +1,7 @@
 import BookingForm from "./BookingForm"
 import BookingSlots from "./BookingSlots";
 import { useReducer } from "react";
-import { fetchAPI, genTables } from "../api/api";
+import { fetchAPI, genTables, updTables } from "../api/api";
 
 export const initializeTimes = () => {
     let times = fetchAPI(new Date());
@@ -18,7 +18,12 @@ export const initializeTimes = () => {
 export const updateTimes = (state, action) => {
     switch(action.type) {
         case "UPDATE_TIMES":
-            return {...state, availableTimes: fetchAPI(action.date), selectedDate: action.date};
+            const newAvailableTimes = fetchAPI(action.date);
+            if ( !(newAvailableTimes.every(function(value) {return state.availableTimes.includes(value);})) ) {
+                return {...state, availableTimes: newAvailableTimes, selectedDate: action.date, tables: updTables(state.tables, newAvailableTimes)};
+            } else {
+                return {...state, availableTimes: fetchAPI(action.date), selectedDate: action.date};
+            }
         case "UPDATE_SELECTED_TIME":
             return {...state, selectedTime: action.time};
 
@@ -60,7 +65,8 @@ const BookingPage = () => {
 
     const init = initializeTimes();
     const [options, dispatch] = useReducer(updateTimes, init);
-    console.log(options.selectedTables)
+    console.log(options.selectedTables);
+    console.log(options.tables[options.selectedTime]);
     return (
         <>
         <BookingForm options={options} dispatch={dispatch}/>

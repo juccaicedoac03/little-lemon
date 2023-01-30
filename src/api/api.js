@@ -29,6 +29,18 @@ export const genTables = function (date, times) {
     return timeTables;
 };
 
+export const updTables = function (times, newTimes) {
+    let TIMES = {...times};
+    let keys = Object.keys(TIMES);
+    let tables = TIMES[keys[0]];
+    for (let i of newTimes) {
+        if (!keys.includes(i)) {
+            TIMES[i] = tables;
+        };
+    }
+    return TIMES;
+};
+
 export const fetchAPI = function(date) {
     let result = [];
     let random = seededRandom(date.getDate());
