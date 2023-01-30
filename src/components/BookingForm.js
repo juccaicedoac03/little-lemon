@@ -1,16 +1,32 @@
 import { useState } from "react";
-import { getReservations, formatDate } from "../api/api";
+import { getReservations, formatDate, submitAPI } from "../api/api";
+import { useNavigate } from "react-router-dom";
 
+  
 const BookingForm = (props) => {
 
     const [date, setDate] = useState( formatDate(new Date()) );
     const [guests, setGuests] = useState(1);
     const [occasion, setOccasion] = useState("birthday");
+    const navigate = useNavigate();
+
+    const submitForm = (formData) => {
+        const user = submitAPI(formData);
+        if (user) {
+            navigate("/confirmation");
+            console.log('done')
+        }
+      };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        props.dispatch({type: "UPDATE_AVAILABLE_TIMES", time: props.options.selectedTime, reservations: getReservations(props.options.selectedTables) });
         alert("Account created!");
+        submitForm(e.target.value);
+    };
+
+    const handleAddReservation = (e) => {
+        props.dispatch({type: "UPDATE_AVAILABLE_TIMES", time: props.options.selectedTime, reservations: getReservations(props.options.selectedTables) });
+        alert("Reservation added!")
     };
 
     const handleDateChange = (e) => {
@@ -38,6 +54,7 @@ const BookingForm = (props) => {
                 <option value="birthday">Birthday</option>
                 <option value="anniversary">Anniversary</option>
             </select>
+            <button type="button" value="Add reservaion" onClick={handleAddReservation}>Add reservaion</button>
             <button type="submit" value="Make you reservation" >Make you reservation</button>
         </form>
     )

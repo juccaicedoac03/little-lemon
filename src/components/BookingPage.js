@@ -3,6 +3,11 @@ import BookingSlots from "./BookingSlots";
 import { useReducer } from "react";
 import { fetchAPI, genTables, updTables, getReservations, formatDate } from "../api/api";
 
+
+
+
+
+
 export const initializeTimes = () => {
     let times = fetchAPI(new Date());
     return (

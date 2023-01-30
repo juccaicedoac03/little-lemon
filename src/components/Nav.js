@@ -34,7 +34,7 @@ const Nav = (props) => {
             setIsClicked(!isClicked);
         }
       }
-    
+
     return (
         <div className={props.className}>
         {!isVisible && <img id='hamburguer' src={Hamburger} alt="Hamburger" onClick={handleClick}/>}
