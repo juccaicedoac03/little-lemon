@@ -2,9 +2,9 @@ import Button from "./Button";
 
 const isSelected = (props, element) => {
     if (props.options.selectedTables) {
-        if (props.options.selectedTables[props.options.selectedDate.toLocaleDateString()]) {
-            if (props.options.selectedTables[props.options.selectedDate.toLocaleDateString()][props.options.selectedTime]) {
-                return props.options.selectedTables[props.options.selectedDate.toLocaleDateString()][props.options.selectedTime].includes(element);
+        if (props.options.selectedTables[props.options.selectedDate.replace(/-/g, '/')]) {
+            if (props.options.selectedTables[props.options.selectedDate.replace(/-/g, '/')][props.options.selectedTime]) {
+                return props.options.selectedTables[props.options.selectedDate.replace(/-/g, '/')][props.options.selectedTime].includes(element);
             }
         }
     } else {

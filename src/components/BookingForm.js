@@ -1,21 +1,23 @@
 import { useState } from "react";
+import { getReservations, formatDate } from "../api/api";
 
 const BookingForm = (props) => {
 
-    const [date, setDate] = useState(new Date());
+    const [date, setDate] = useState( formatDate(new Date()) );
     /*const [selectedValue, setSelectedValue] = useState(props.options.availableTimes[0]);*/
     const [guests, setGuests] = useState(1);
     const [occasion, setOccasion] = useState("birthday");
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        props.dispatch({type: "UPDATE_AVAILABLE_TIMES", time: props.options.selectedTime});
+        props.dispatch({type: "UPDATE_AVAILABLE_TIMES", time: props.options.selectedTime, reservations: ()=>{ getReservations(props.options.selectedTables) }});
         alert("Account created!");
     };
 
     const handleDateChange = (e) => {
         setDate(e.target.value);
-        props.dispatch({type: "UPDATE_TIMES", date: new Date(e.target.value)});
+        console.log(e.target.value)
+        props.dispatch({type: "UPDATE_TIMES", date: e.target.value});
     };
 
     return (

@@ -55,6 +55,14 @@ export const getReservations = function(sels) {
     return reservations;
 }
 
+export const formatDate = (date) => {
+    const dateVec = date.toLocaleString().split(' ')[0].split('/')
+    if (dateVec[1].length===1){
+        dateVec[1] = '0' + dateVec[1];
+    }
+    return dateVec[2] + '-' + dateVec[1] + '-' + dateVec[0];
+};
+
 export const fetchAPI = function(date) {
     let result = [];
     let random = seededRandom(date.getDate());
