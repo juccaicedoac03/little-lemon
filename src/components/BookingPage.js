@@ -29,12 +29,20 @@ export const updateTimes = (state, action) => {
             return {...state, selectedTime: action.time};
 
         case "UPDATE_AVAILABLE_TIMES":
-            const index = state.availableTimes.findIndex(item => item.toString() === action.time,toString());
             const newState = {...state};
-            if (index !== -1) {
-                newState.availableTimes.splice(index, 1);
-                newState.selectedTime = newState.availableTimes[0];
+            const count = {};
+            for (let res of action.reservations) {
+                let reserved = res.split("-");
+                count[reserved[0]+"-"+reserved[1]] = (count[reserved[0]+"-"+reserved[1]] || 0) + 1;
+                console.log(count,Object.keys(state.tables[reserved[1]]).length)
+                if ((reserved[0].toString() === state.selectedDate.replace(/-/g,'/').toString()) && (count[reserved[0]+"-"+reserved[1]] === Object.keys(state.tables[reserved[1]]).length )) {
+                    let index = state.availableTimes.findIndex(item => item.toString() === reserved[1],toString());
+                    if (index !== -1) {
+                        newState.availableTimes.splice(index, 1);
+                    };
+                };
             };
+            newState.selectedTime = newState.availableTimes[0];
             newState.reservations = action.reservations;
             return newState;
 
@@ -61,15 +69,14 @@ export const updateTimes = (state, action) => {
         case "DELETE_RESERVATION":
             const newState3 = {...state};
             const selection = action.selectedReservation.split("-");
-            console.log(selection)
             const index2 = newState3.selectedTables[selection[0]][selection[1]].findIndex(item => item === selection[2]);
             newState3.selectedTables[selection[0]][selection[1]].splice(index2, 1);
 
-            const selTables = getReservations(newState3.selectedTables);
-            if ( (!newState3.availableTimes.includes(selection[1])) && (!selTables.map((element)=>{return element.split("-")[0]+"-"+element.split("-")[1]}).includes(selection[0]+"-"+selection[1])) ) {
+            if ( !newState3.availableTimes.includes(selection[1]) ) {
                 newState3.availableTimes.push(selection[1]);
-            }
-            if (getReservations(newState3.selectedTables).length === 0) {
+                newState3.availableTimes = newState3.availableTimes.sort();
+                newState3.selectedTime = newState3.availableTimes[0];
+            } else if (getReservations(newState3.selectedTables).length === 0) {
                 newState3.reservations = false;
                 newState3.availableTimes = fetchAPI(new Date(newState3.selectedDate.replace(/-/g, '/')));
             }
@@ -84,7 +91,6 @@ const BookingPage = () => {
 
     const init = initializeTimes();
     const [options, dispatch] = useReducer(updateTimes, init);
-    console.log(options.selectedTables);
     return (
         <>
         <BookingForm options={options} dispatch={dispatch}/>
