@@ -1,14 +1,8 @@
 import {initializeTimes} from './components/BookingPage';
+import { fetchAPI } from './api/api';
 
 test('Test initializeTimes function', () => {
-    expect(initializeTimes()).toEqual(
-      {times: [
-        "17:00",
-        "18:00",
-        "19:00",
-        "20:00",
-        "21:00",
-        "22:00",
-    ]}
+    expect(initializeTimes().availableTimes).toEqual(
+      fetchAPI(new Date())
     );
   });

@@ -1,23 +1,13 @@
 import { updateTimes } from "./components/BookingPage";
+import {initializeTimes} from './components/BookingPage';
+
 
 test('Test initializeTimes function', () => {
+    const init = initializeTimes();
     expect(updateTimes(
-        {times: [
-            "17:00",
-            "18:00",
-            "19:00",
-            "20:00",
-            "21:00",
-            "22:00",
-        ]}
-    )).toEqual(
-        {times: [
-          "17:00",
-          "18:00",
-          "19:00",
-          "20:00",
-          "21:00",
-          "22:00",
-      ]}
+        init,{type: "UPDATE_SELECTED_TIME", time: "17:00"}
+    ).selectedTime
+    ).toEqual(
+        init.availableTimes[0]
       );
   });
