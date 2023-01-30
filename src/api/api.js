@@ -41,6 +41,20 @@ export const updTables = function (times, newTimes) {
     return TIMES;
 };
 
+export const getReservations = function(sels) {
+    let reservations = [];
+    for (let keyDate in sels) {
+        for (let keyTime in sels[keyDate]) {
+            sels[keyDate][keyTime].map((element)=>{
+                return (
+                reservations.push(keyDate + "-" + keyTime + "-" +  element)
+                )
+            });
+        };
+    };
+    return reservations;
+}
+
 export const fetchAPI = function(date) {
     let result = [];
     let random = seededRandom(date.getDate());

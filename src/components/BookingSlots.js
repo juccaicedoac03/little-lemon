@@ -16,7 +16,11 @@ const isSelected = (props, element) => {
 const BookingSlots = (props) => {
 
     const handleClick = (e,isSelected) => {
-        props.dispatch({type: "UPDATE_SELECTED_TABLE", selectedTable: e, isSelected: isSelected});
+        if (props.isReserved) {
+            props.dispatch({type: "DELETE_RESERVATION", selectedReservation: e});
+        } else {
+            props.dispatch({type: "UPDATE_SELECTED_TABLE", selectedTable: e, isSelected: isSelected});
+        }
     };
 
     return (

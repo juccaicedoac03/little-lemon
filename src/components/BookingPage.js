@@ -1,7 +1,7 @@
 import BookingForm from "./BookingForm"
 import BookingSlots from "./BookingSlots";
 import { useReducer } from "react";
-import { fetchAPI, genTables, updTables } from "../api/api";
+import { fetchAPI, genTables, updTables, getReservations } from "../api/api";
 
 export const initializeTimes = () => {
     let times = fetchAPI(new Date());
@@ -34,7 +34,7 @@ export const updateTimes = (state, action) => {
                 newState.noAvailableTimes.push(newState.availableTimes[index]);
                 newState.availableTimes.splice(index, 1);
                 newState.selectedTime = newState.availableTimes[0];
-            }
+            };
             return newState;
 
         case "UPDATE_SELECTED_TABLE":
@@ -54,7 +54,14 @@ export const updateTimes = (state, action) => {
                     newState2.selectedTables[newState2.selectedDate.toLocaleDateString()] = {[newState2.selectedTime]: [action.selectedTable]};
                 }
                 return newState2;
-            }
+            };
+
+        case "DELETE_RESERVATION":
+            const newState3 = {...state};
+            const selection = action.selectedReservation.split("-");
+            const index2 = newState3.selectedTables[selection[0]][selection[1]].findIndex(item => item === selection[2]);
+            newState3.selectedTables[selection[0]][selection[1]].splice(index2, 1);
+            return newState3;
 
         default:
             return state;
@@ -66,11 +73,12 @@ const BookingPage = () => {
     const init = initializeTimes();
     const [options, dispatch] = useReducer(updateTimes, init);
     console.log(options.selectedTables);
-    console.log(options.tables[options.selectedTime]);
+    console.log(getReservations(options.selectedTables));
     return (
         <>
         <BookingForm options={options} dispatch={dispatch}/>
-        <BookingSlots elements={options.tables[options.selectedTime]} options={options} dispatch={dispatch}/>
+        <BookingSlots elements={options.tables[options.selectedTime]} isReserved={false} options={options} dispatch={dispatch}/>
+        <BookingSlots elements={ getReservations(options.selectedTables)} isReserved={true} options={options} dispatch={dispatch}/>
         </>
     )
 }
