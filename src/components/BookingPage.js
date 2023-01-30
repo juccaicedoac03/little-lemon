@@ -1,12 +1,8 @@
 import BookingForm from "./BookingForm"
 import BookingSlots from "./BookingSlots";
 import { useReducer } from "react";
-import { fetchAPI, genTables, updTables, getReservations, formatDate } from "../api/api";
-
-
-
-
-
+import { fetchAPI, genTables, updTables, getReservations, formatDate, submitAPI } from "../api/api";
+import { useNavigate } from "react-router-dom";
 
 export const initializeTimes = () => {
     let times = fetchAPI(new Date());
@@ -94,11 +90,19 @@ export const updateTimes = (state, action) => {
 
 const BookingPage = () => {
 
+    const navigate = useNavigate();
+
+    const submitForm = (formData) => {
+        if (submitAPI(formData)) {
+            navigate("/confirmation");
+        }
+      };
+
     const init = initializeTimes();
     const [options, dispatch] = useReducer(updateTimes, init);
     return (
         <>
-        <BookingForm options={options} dispatch={dispatch}/>
+        <BookingForm options={options} dispatch={dispatch} submitForm={submitForm}/>
         <BookingSlots elements={options.tables[options.selectedTime]} isReserved={false} options={options} dispatch={dispatch}/>
         <BookingSlots elements={ getReservations(options.selectedTables)} isReserved={true} options={options} dispatch={dispatch}/>
         </>

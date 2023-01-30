@@ -1,27 +1,16 @@
 import { useState } from "react";
-import { getReservations, formatDate, submitAPI } from "../api/api";
-import { useNavigate } from "react-router-dom";
+import { getReservations, formatDate } from "../api/api";
 
-  
 const BookingForm = (props) => {
 
     const [date, setDate] = useState( formatDate(new Date()) );
     const [guests, setGuests] = useState(1);
     const [occasion, setOccasion] = useState("birthday");
-    const navigate = useNavigate();
-
-    const submitForm = (formData) => {
-        const user = submitAPI(formData);
-        if (user) {
-            navigate("/confirmation");
-            console.log('done')
-        }
-      };
 
     const handleSubmit = (e) => {
         e.preventDefault();
         alert("Account created!");
-        submitForm(e.target.value);
+        props.submitForm(e.target.value);
     };
 
     const handleAddReservation = (e) => {
