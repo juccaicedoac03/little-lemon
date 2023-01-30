@@ -9,7 +9,6 @@ export const initializeTimes = () => {
         {availableTimes: times,
         selectedTime: times[0],
         selectedDate: formatDate(new Date()),
-        noAvailableTimes: [],
         tables: genTables(new Date(), times),
         selectedTables: {},
         reservations: false,
@@ -33,7 +32,6 @@ export const updateTimes = (state, action) => {
             const index = state.availableTimes.findIndex(item => item.toString() === action.time,toString());
             const newState = {...state};
             if (index !== -1) {
-                newState.noAvailableTimes.push(newState.availableTimes[index]);
                 newState.availableTimes.splice(index, 1);
                 newState.selectedTime = newState.availableTimes[0];
             };
@@ -91,7 +89,7 @@ const BookingPage = () => {
         <>
         <BookingForm options={options} dispatch={dispatch}/>
         <BookingSlots elements={options.tables[options.selectedTime]} isReserved={false} options={options} dispatch={dispatch}/>
-        {(options.reservations) && <BookingSlots elements={ getReservations(options.selectedTables)} isReserved={true} options={options} dispatch={dispatch}/>}
+        <BookingSlots elements={ getReservations(options.selectedTables)} isReserved={true} options={options} dispatch={dispatch}/>
         </>
     )
 }
