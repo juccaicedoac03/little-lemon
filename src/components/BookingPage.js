@@ -1,8 +1,8 @@
 import BookingForm from "./BookingForm"
 import BookingSlots from "./BookingSlots";
 import { useReducer } from "react";
-import { fetchAPI, genTables, updTables, getReservations, formatDate, submitAPI } from "../api/api";
-import { useNavigate } from "react-router-dom";
+import { fetchAPI, genTables, updTables, getReservations, formatDate } from "../api/api";
+
 
 export const initializeTimes = () => {
     let times = fetchAPI(new Date());
@@ -13,6 +13,9 @@ export const initializeTimes = () => {
         tables: genTables(new Date(), times),
         selectedTables: {},
         reservations: false,
+        reservationList: [],
+        guests: 1,
+        occasion: "Birthday",
     }
     );
 }
@@ -28,6 +31,12 @@ export const updateTimes = (state, action) => {
             }
         case "UPDATE_SELECTED_TIME":
             return {...state, selectedTime: action.time};
+
+        case "UPDATE_SELECTED_OCCASION":
+            return {...state, occasion: action.occasion};
+
+        case "UPDATE_SELECTED_GUESTS":
+            return {...state, guests: action.guests};
 
         case "UPDATE_AVAILABLE_TIMES":
             const newState = {...state};
@@ -51,10 +60,14 @@ export const updateTimes = (state, action) => {
             const newState2 = {...state};
             const selectedDate = newState2.selectedDate.replace(/-/g, '/');
             if (action.isSelected) {
+                const selReserve = newState2.reservationList.map((element) =>{ return element.split("-")[0]+'-'+element.split("-")[1]+'-'+element.split("-")[2]; });
+                const indexRes = selReserve.findIndex(item => item === selectedDate+'-'+newState2.selectedTime+'-'+action.selectedTable);
+                newState2.reservationList.splice(indexRes, 1);
                 const index = newState2.selectedTables[selectedDate][newState2.selectedTime].findIndex(item => item === action.selectedTable);
                 newState2.selectedTables[selectedDate][newState2.selectedTime].splice(index, 1);
                 return newState2;
             } else {
+                newState2.reservationList.push(selectedDate+'-'+newState2.selectedTime+'-'+action.selectedTable+'-'+newState2.guests+'-'+newState2.occasion);
                 if (newState2.selectedTables[selectedDate]) {
                     if (newState2.selectedTables[selectedDate][newState2.selectedTime]) {
                         newState2.selectedTables[selectedDate][newState2.selectedTime].push(action.selectedTable);
@@ -70,6 +83,9 @@ export const updateTimes = (state, action) => {
         case "DELETE_RESERVATION":
             const newState3 = {...state};
             const selection = action.selectedReservation.split("-");
+            const selReserve = newState3.reservationList.map((element) =>{ return element.split("-")[0]+'-'+element.split("-")[1]+'-'+element.split("-")[2]; });
+            const indexRes = selReserve.findIndex(item => item === action.selectedReservation);
+            newState3.reservationList.splice(indexRes, 1);
             const index2 = newState3.selectedTables[selection[0]][selection[1]].findIndex(item => item === selection[2]);
             newState3.selectedTables[selection[0]][selection[1]].splice(index2, 1);
 
@@ -89,20 +105,12 @@ export const updateTimes = (state, action) => {
 }
 
 const BookingPage = () => {
-
-    const navigate = useNavigate();
-
-    const submitForm = (formData) => {
-        if (submitAPI(formData)) {
-            navigate("/confirmation");
-        }
-      };
-
     const init = initializeTimes();
     const [options, dispatch] = useReducer(updateTimes, init);
+
     return (
         <>
-        <BookingForm options={options} dispatch={dispatch} submitForm={submitForm}/>
+        <BookingForm options={options} dispatch={dispatch}/>
         <BookingSlots elements={options.tables[options.selectedTime]} isReserved={false} options={options} dispatch={dispatch}/>
         <BookingSlots elements={ getReservations(options.selectedTables)} isReserved={true} options={options} dispatch={dispatch}/>
         </>
