@@ -15,7 +15,7 @@ export const initializeTimes = () => {
         reservations: false,
         reservationList: [],
         guests: 1,
-        occasion: "Birthday",
+        occasion: "General",
     }
     );
 }

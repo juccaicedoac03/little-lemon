@@ -6,8 +6,24 @@ const BookingForm = (props) => {
 
     const [date, setDate] = useState( formatDate(new Date()) );
     const [guests, setGuests] = useState(1);
-    const [occasion, setOccasion] = useState("birthday");
+    const [occasion, setOccasion] = useState("general");
     const navigate = useNavigate();
+
+    const validateForm = () => {
+        let validDate = false;
+        if ( new Date(date.replace(/-/g,'/')) >= new Date(formatDate(new Date()).replace(/-/g,'/')) ) {
+            validDate = true;
+        };
+
+        let validGuests = true;
+        if ( guests<1 || guests > 10) {
+            validGuests = false;
+        }
+
+        console.log('here', !validDate, !validGuests, !validDate && !validGuests)
+
+        return (!validDate || !validGuests)
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -26,12 +42,12 @@ const BookingForm = (props) => {
     const handleOcassionChange = (e) => {
         setOccasion(e.target.value);
         props.dispatch({type:"UPDATE_SELECTED_OCCASION" , occasion: e.target.value});
-    }
+    };
 
     const handleGuestsChange = (e) => {
         setGuests(e.target.value);
         props.dispatch({type:"UPDATE_SELECTED_GUESTS" , guests: e.target.value});
-    }
+    };
 
     return (
         <form onSubmit={handleSubmit} style={{display: "grid", maxWidth: "200px", gap: "20px"}}>
@@ -49,10 +65,13 @@ const BookingForm = (props) => {
             <input type="number" id="guest" name="guest" value={guests} placeholder="1" min="1" max="10" required onChange={handleGuestsChange}/>
             <label htmlFor="occasion">Occasion</label>
             <select id="occasion" name="occasion" value={occasion} required onChange={handleOcassionChange}>
+                <option value="general">General</option>
                 <option value="birthday">Birthday</option>
                 <option value="anniversary">Anniversary</option>
+                <option value="business">Business</option>
+                <option value="other">Other</option>
             </select>
-            <button type="submit" value="Make you reservation" >Make you reservation</button>
+            <button type="submit" disabled={validateForm()} value="Make you reservation" >Make you reservation</button>
         </form>
     )
 }

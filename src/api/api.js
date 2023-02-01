@@ -12,6 +12,9 @@ export const genTables = function (date, times) {
     let max = 15;
 
     let x = Array.from(date.getDate().toString(), Number).reduce((a, b) => a + b, 0);
+    if (x<5){
+        x += 10;
+    }
 
     let tables = [];
 
