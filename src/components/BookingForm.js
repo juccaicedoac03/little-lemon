@@ -11,6 +11,9 @@ const BookingForm = (props) => {
 
     const validateForm = () => {
         let validDate = false;
+        if (date !== null) {
+            console.log('here date')
+        }
         if ( new Date(date.replace(/-/g,'/')) >= new Date(formatDate(new Date()).replace(/-/g,'/')) ) {
             validDate = true;
         };
@@ -40,6 +43,7 @@ const BookingForm = (props) => {
         setDate(e.target.value);
         props.dispatch({type: "UPDATE_TIMES", date: e.target.value});
         props.dispatch({type: "UPDATE_AVAILABLE_TIMES", time: props.options.selectedTime, reservations: getReservations(props.options.selectedTables)});
+        e.target.blur();
     };
 
     const handleOcassionChange = (e) => {
