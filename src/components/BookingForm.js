@@ -10,12 +10,9 @@ const BookingForm = (props) => {
     const navigate = useNavigate();
 
     const validateForm = () => {
-        let validDate = false;
-        if (date !== null) {
-            console.log('here date')
-        }
-        if ( new Date(date.replace(/-/g,'/')) >= new Date(formatDate(new Date()).replace(/-/g,'/')) ) {
-            validDate = true;
+        let validDate = true;
+        if ( new Date(date.replace(/-/g,'/')) < new Date(formatDate(new Date()).replace(/-/g,'/')) ) {
+            validDate = false;
         };
 
         let validGuests = true;
@@ -23,12 +20,12 @@ const BookingForm = (props) => {
             validGuests = false;
         }
 
-        let validReservations = true;
+        let validReservations = false;
         if (props.options.reservationList.length > 0) {
-            validReservations = false;
+            validReservations = true;
         }
 
-        return (!validDate || !validGuests || validReservations)
+        return (!validDate || !validGuests || !validReservations)
     };
 
     const handleSubmit = (e) => {
