@@ -16,13 +16,16 @@ const BookingForm = (props) => {
         };
 
         let validGuests = true;
-        if ( guests<1 || guests > 10) {
+        if ( guests<1 || guests > 15) {
             validGuests = false;
         }
 
-        console.log('here', !validDate, !validGuests, !validDate && !validGuests)
+        let validReservations = true;
+        if (props.options.reservationList.length > 0) {
+            validReservations = false;
+        }
 
-        return (!validDate || !validGuests)
+        return (!validDate || !validGuests || validReservations)
     };
 
     const handleSubmit = (e) => {
