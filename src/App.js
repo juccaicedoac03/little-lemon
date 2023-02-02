@@ -9,8 +9,17 @@ import ConfirmedBooking from './components/ConfirmedBooking';
 import Footer from './components/Footer';
 import Logo from './images/Logo.svg';
 import { Route,Routes } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import { submitAPI } from "./api/api";
 
 function App() {
+  const navigate = useNavigate();
+
+  const submitForm = (formData) => {
+    if (submitAPI(formData)) {
+        navigate("/confirmation", { state: { reservations: formData } });
+    }
+  }
   return (
     <div className='container'>
       <header>
@@ -23,7 +32,7 @@ function App() {
       <Nav className="nav"/>
       <Routes>
         <Route path='/' element={<Main className="main"/>}/>
-        <Route path='/reservation' element={<BookingPage/>}/>
+        <Route path='/reservation' element={<BookingPage submitForm={submitForm}/>}/>
         <Route path='/confirmation' element={<ConfirmedBooking/>}/>
       </Routes>
       <Footer className="footer"/>

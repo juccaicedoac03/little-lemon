@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { getReservations, formatDate, submitAPI } from "../api/api";
-import { useNavigate } from "react-router-dom";
+import { getReservations, formatDate } from "../api/api";
+/*import { useNavigate } from "react-router-dom";*/
 
 const BookingForm = (props) => {
 
@@ -8,7 +8,7 @@ const BookingForm = (props) => {
     const [guests, setGuests] = useState(1);
     const [occasion, setOccasion] = useState("general");
     const [errors, setErrors] = useState({});
-    const navigate = useNavigate();
+    /*const navigate = useNavigate();*/
 
     const validateForm = () => {
 
@@ -36,10 +36,12 @@ const BookingForm = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (submitAPI(e)) {
+        /*if (submitAPI(e)) {
             alert("Account created!");
             navigate("/confirmation", { state: { reservations: props.options.reservationList } });
-        }
+        }*/
+        alert("Account created!");
+        props.submitForm(props.options.reservationList);
     };
 
     const handleDateChange = (e) => {
@@ -79,11 +81,11 @@ const BookingForm = (props) => {
     };
     return (
         <form onSubmit={handleSubmit} style={{display: "grid", maxWidth: "200px", gap: "20px"}}>
-            <label htmlFor="res-date">Choose date</label>
-            <input type="date" id="res-date" name="res-date" value={date} required onChange={handleDateChange}/>
+            <label htmlFor="date">Choose date</label>
+            <input type="date" id="date" name="date" value={date} required onChange={handleDateChange}/>
             {(errors.date && errors.date.length>0) && <div className="error">{errors.date}</div>}
-            <label htmlFor="res-time">Choose time</label>
-            <select id="res-time" name="res-time" value={props.options.selectedTime} required onChange={(e) => {props.dispatch({type: "UPDATE_SELECTED_TIME", time: e.target.value})}}>
+            <label htmlFor="time">Choose time</label>
+            <select id="time" type="text" name="time" value={props.options.selectedTime} required onChange={(e) => {props.dispatch({type: "UPDATE_SELECTED_TIME", time: e.target.value})}}>
                 {props.options.availableTimes.map((time,index) => {
                     return (
                         <option key={index} value={time}>{time}</option>
@@ -94,7 +96,7 @@ const BookingForm = (props) => {
             <input type="number" id="guest" name="guest" value={guests} placeholder="1" min="1" max="10" required onChange={handleGuestsChange}/>
             {(errors.guests && errors.guests.length>0) && <div className="error">{errors.guests}</div>}
             <label htmlFor="occasion">Occasion</label>
-            <select id="occasion" name="occasion" value={occasion} required onChange={handleOcassionChange}>
+            <select type="text" id="occasion" name="occasion" value={occasion} required onChange={handleOcassionChange}>
                 <option value="general">General</option>
                 <option value="birthday">Birthday</option>
                 <option value="anniversary">Anniversary</option>
