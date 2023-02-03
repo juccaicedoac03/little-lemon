@@ -138,7 +138,7 @@ const BookingForm = (props) => {
             <label htmlFor="email">Email</label>
             <input type="email" id="email" name="email" value={email} placeholder="example@little-lemon.com" onChange={(e)=>{setEmail(e.target.value)}} onBlur={handleEmailBlur} required arial-label="Enter email"/>
             {!isEmailValid && (<div className="error">Please enter a valid Email address</div>)}
-            <label htmlFor="numberPhone">Number phone</label>
+            <label htmlFor="numberPhone">Phone number</label>
             <input type="tel" id="numberPhone" name="numberPhone" pattern="+[0-9]{2,3} [0-9]{10}" placeholder="+57 9120000001" onChange={(e)=>{setPhone(e.target.value)}} onBlur={handlePhoneBlur} required arial-label="Enter number phone"/>
             {!isPhoneValid && (<div className="error">Please enter a valid phone number</div>)}
             <label htmlFor="date">Choose date</label>

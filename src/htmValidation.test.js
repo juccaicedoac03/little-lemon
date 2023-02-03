@@ -8,6 +8,22 @@ describe ('Validate Form', () => {
         const {getByLabelText} = render(
             <BookingForm options={options}/>
         );
+        const nameInput = getByLabelText('First name');
+        expect(nameInput).toHaveAttribute('type', 'text');
+        expect(nameInput).toHaveAttribute('required', '');
+
+        const lastnameInput = getByLabelText('Last name');
+        expect(lastnameInput).toHaveAttribute('type', 'text');
+        expect(lastnameInput).toHaveAttribute('required', '');
+
+        const emailInput = getByLabelText('Email');
+        expect(emailInput).toHaveAttribute('type', 'email');
+        expect(emailInput).toHaveAttribute('required', '');
+
+        const phoneInput = getByLabelText('Phone number');
+        expect(phoneInput).toHaveAttribute('type', 'tel');
+        expect(phoneInput).toHaveAttribute('required', '');
+
         const dateInput = getByLabelText('Choose date');
         expect(dateInput).toHaveAttribute('type', 'date');
         expect(dateInput).toHaveAttribute('required', '');
