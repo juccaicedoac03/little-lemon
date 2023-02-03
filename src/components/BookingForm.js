@@ -79,6 +79,7 @@ const BookingForm = (props) => {
         }
         ;
     };
+
     return (
         <form onSubmit={handleSubmit} style={{display: "grid", maxWidth: "200px", gap: "20px"}}>
             <label htmlFor="date">Choose date</label>
