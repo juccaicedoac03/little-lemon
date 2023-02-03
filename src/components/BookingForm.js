@@ -83,10 +83,10 @@ const BookingForm = (props) => {
     return (
         <form onSubmit={handleSubmit} style={{display: "grid", maxWidth: "200px", gap: "20px"}}>
             <label htmlFor="date">Choose date</label>
-            <input type="date" id="date" name="date" value={date} required onChange={handleDateChange}/>
+            <input type="date" id="date" name="date" value={date} required onChange={handleDateChange} arial-label="Select a date"/>
             {(errors.date && errors.date.length>0) && <div className="error">{errors.date}</div>}
             <label htmlFor="time">Choose time</label>
-            <select id="time" type="text" name="time" value={props.options.selectedTime} required onChange={(e) => {props.dispatch({type: "UPDATE_SELECTED_TIME", time: e.target.value})}}>
+            <select id="time" type="text" name="time" arial-label="Select a time" value={props.options.selectedTime} required onChange={(e) => {props.dispatch({type: "UPDATE_SELECTED_TIME", time: e.target.value})}}>
                 {props.options.availableTimes.map((time,index) => {
                     return (
                         <option key={index} value={time}>{time}</option>
@@ -94,17 +94,17 @@ const BookingForm = (props) => {
                 })}
             </select>
             <label htmlFor="guest">Number of guest</label>
-            <input type="number" id="guest" name="guest" value={guests} placeholder="1" min="1" max="10" required onChange={handleGuestsChange}/>
+            <input type="number" id="guest" name="guest" value={guests} placeholder="1" min="1" max="10" required onChange={handleGuestsChange} arial-label="Enter number of guests"/>
             {(errors.guests && errors.guests.length>0) && <div className="error">{errors.guests}</div>}
             <label htmlFor="occasion">Occasion</label>
-            <select type="text" id="occasion" name="occasion" value={occasion} required onChange={handleOcassionChange}>
+            <select type="text" id="occasion" name="occasion" value={occasion} required onChange={handleOcassionChange} arial-label="Select the occasion">
                 <option value="general">General</option>
                 <option value="birthday">Birthday</option>
                 <option value="anniversary">Anniversary</option>
                 <option value="business">Business</option>
                 <option value="other">Other</option>
             </select>
-            <button type="submit" disabled={validateForm()} value="Make you reservation" >Make you reservation</button>
+            <button type="submit" disabled={validateForm()} value="Make you reservation" aria-label="On Click">Make you reservation</button>
         </form>
     )
 }
