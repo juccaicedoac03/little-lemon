@@ -4,6 +4,14 @@ import { getReservations, formatDate } from "../api/api";
 
 const BookingForm = (props) => {
 
+    const [name, setName] = useState("");
+    const [isNameValid, setIsNameValid] = useState(true);
+    const [lastname, setLastname] = useState("");
+    const [isLastnameValid, setIsLastnameValid] = useState(true);
+    const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
+    const [isEmailValid, setIsEmailValid] = useState(true);
+    const [isPhoneValid, setIsPhoneValid] = useState(true);
     const [date, setDate] = useState( formatDate(new Date()) );
     const [guests, setGuests] = useState(1);
     const [occasion, setOccasion] = useState("general");
@@ -12,7 +20,25 @@ const BookingForm = (props) => {
 
     const validateForm = () => {
 
-        const formErrors = {};
+        let validName = false;
+        if (name.length > 0) {
+            validName = true;
+        };
+
+        let validLastname = false;
+        if (lastname.length > 0) {
+            validLastname = true;
+        };
+
+        let validEmail = false;
+        if (/^[^@]+@[^.]+\..+$/.test(email)) {
+            validEmail = true;
+        };
+
+        let validPhone = false;
+        if (/^\+\d{2,3} \d{10}$/.test(phone)) {
+            validPhone = true;
+        };
 
         let validDate = true;
         if ( new Date(date.replace(/-/g,'/')) < new Date(formatDate(new Date()).replace(/-/g,'/')) ) {
@@ -27,11 +53,10 @@ const BookingForm = (props) => {
         let validReservations = false;
         if (props.options.reservationList.length > 0) {
             validReservations = true;
-        } else {
-            formErrors["reservations"] = "Select a table";
         };
 
-        return (!validDate || !validGuests || !validReservations)
+
+        return (!validName || !validLastname || !validPhone || !validEmail || !validDate || !validGuests || !validReservations)
     };
 
     const handleSubmit = (e) => {
@@ -42,6 +67,28 @@ const BookingForm = (props) => {
         }*/
         alert("Account created!");
         props.submitForm(props.options.reservationList);
+    };
+
+    const handleNameBlur = (e) => {
+        setIsNameValid(e.target.value.length > 0);
+    };
+    const handleLastnameBlur = (e) => {
+        setIsLastnameValid(e.target.value.length > 0);
+    };
+    const handleEmailBlur = (e) => {
+        if (e.target.value.length > 0) {
+            setIsEmailValid( /^[^@]+@[^.]+\..+$/.test(e.target.value) );
+        } else {
+            setIsEmailValid(true);
+        }
+        ;
+      };
+    const handlePhoneBlur = (e) => {
+        if (e.target.value.length > 0) {
+            setIsPhoneValid(/^\+\d{2,3} \d{10}$/.test(e.target.value));
+        } else {
+            setIsPhoneValid(true);
+        };
     };
 
     const handleDateChange = (e) => {
@@ -82,6 +129,18 @@ const BookingForm = (props) => {
 
     return (
         <form onSubmit={handleSubmit} style={{display: "grid", maxWidth: "200px", gap: "20px"}}>
+            <label htmlFor="firstname">First name</label>
+            <input type="text" id="firstname" name="firstname" value={name} placeholder="Enter your first name" onChange={(e)=>{setName(e.target.value)}} onBlur={handleNameBlur} required arial-label="Enter first name"/>
+            {!isNameValid && (<div className="error">Please enter a first name</div>)}
+            <label htmlFor="lastname">Last name</label>
+            <input type="text" id="lastname" name="lastname" value={lastname} placeholder="Enter your last name" onChange={(e)=>{setLastname(e.target.value)}} onBlur={handleLastnameBlur} required arial-label="Enter last name"/>
+            {!isLastnameValid && (<div className="error">Please enter a last name</div>)}
+            <label htmlFor="email">Email</label>
+            <input type="email" id="email" name="email" value={email} placeholder="example@little-lemon.com" onChange={(e)=>{setEmail(e.target.value)}} onBlur={handleEmailBlur} required arial-label="Enter email"/>
+            {!isEmailValid && (<div className="error">Please enter a valid Email address</div>)}
+            <label htmlFor="numberPhone">Number phone</label>
+            <input type="tel" id="numberPhone" name="numberPhone" pattern="+[0-9]{2,3} [0-9]{10}" placeholder="+57 9120000001" onChange={(e)=>{setPhone(e.target.value)}} onBlur={handlePhoneBlur} required arial-label="Enter number phone"/>
+            {!isPhoneValid && (<div className="error">Please enter a valid phone number</div>)}
             <label htmlFor="date">Choose date</label>
             <input type="date" id="date" name="date" value={date} required onChange={handleDateChange} arial-label="Select a date"/>
             {(errors.date && errors.date.length>0) && <div className="error">{errors.date}</div>}
