@@ -24,7 +24,7 @@ const BookingSlots = (props) => {
     };
 
     return (
-        <div id='bookingSlots'>
+        <div className={props.className} id='bookingSlots'>
         {(props.elements) && props.elements.map((element,index)=>{
             return (
                 <Button key={index} value={element} label={element} isSelected={ isSelected(props,element) } onClick={handleClick} />

@@ -1,0 +1,25 @@
+.bookingContainer {
+    background-color: aqua;
+    width: 100%;
+    display: grid;
+    grid-template-areas:
+        'form tables'
+        'form reservations';
+}
+
+.form {
+    grid-area: form;
+    width: 40%;
+    background-color: red;
+}
+
+.tables {
+    background-color: blue;
+    grid-area: tables;
+    width: 60%;
+}
+
+.reservations {
+    background-color: green;
+    grid-area: reservations;
+}

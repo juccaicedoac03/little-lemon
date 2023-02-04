@@ -128,7 +128,7 @@ const BookingForm = (props) => {
     };
 
     return (
-        <form onSubmit={handleSubmit} style={{display: "grid", maxWidth: "200px", gap: "20px"}}>
+        <form onSubmit={handleSubmit} className={props.className} style={{display: "grid", maxWidth: "200px", gap: "20px"}}>
             <label htmlFor="firstname">First name</label>
             <input type="text" id="firstname" name="firstname" value={name} placeholder="Enter your first name" onChange={(e)=>{setName(e.target.value)}} onBlur={handleNameBlur} required arial-label="Enter first name"/>
             {!isNameValid && (<div className="error">Please enter a first name</div>)}
