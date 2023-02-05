@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { getReservations, formatDate } from "../api/api";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 /*import { useNavigate } from "react-router-dom";*/
 
 const BookingForm = (props) => {
@@ -12,7 +14,8 @@ const BookingForm = (props) => {
     const [phone, setPhone] = useState("");
     const [isEmailValid, setIsEmailValid] = useState(true);
     const [isPhoneValid, setIsPhoneValid] = useState(true);
-    const [date, setDate] = useState( formatDate(new Date()) );
+    const [date, setDate] = useState( new Date() );
+    /*const [startDate, setStartDate] = useState(new Date());*/
     const [guests, setGuests] = useState(1);
     const [occasion, setOccasion] = useState("general");
     const [errors, setErrors] = useState({});
@@ -41,7 +44,8 @@ const BookingForm = (props) => {
         };
 
         let validDate = true;
-        if ( new Date(date.replace(/-/g,'/')) < new Date(formatDate(new Date()).replace(/-/g,'/')) ) {
+        /*if ( new Date(date.replace(/-/g,'/')) < new Date(formatDate(new Date()).replace(/-/g,'/')) ) {*/
+        if ( date < new Date() ) {
             validDate = false;
         };
 
@@ -90,12 +94,12 @@ const BookingForm = (props) => {
             setIsPhoneValid(true);
         };
     };
-
-    const handleDateChange = (e) => {
-        setDate(e.target.value);
-        props.dispatch({type: "UPDATE_TIMES", date: e.target.value});
+    const handleDateChange = (date) => {
+        setDate(date);
+        props.dispatch({type: "UPDATE_TIMES", date: formatDate(date)});
         props.dispatch({type: "UPDATE_AVAILABLE_TIMES", time: props.options.selectedTime, reservations: getReservations(props.options.selectedTables)});
-        if ( new Date(e.target.value.replace(/-/g,'/')) < new Date(formatDate(new Date()).replace(/-/g,'/')) ) {
+        /*if ( new Date(e.target.value.replace(/-/g,'/')) < new Date(formatDate(new Date()).replace(/-/g,'/')) ) {*/
+        if ( date < new Date() ) {
             let state = {...errors};
             state["date"] = "Date must be greater or equal than today";
             setErrors(state);
@@ -104,7 +108,7 @@ const BookingForm = (props) => {
             state["date"] = "";
             setErrors(state);
         };
-        e.target.blur();
+        /*e.target.blur();*/
     };
 
     const handleOcassionChange = (e) => {
@@ -152,7 +156,13 @@ const BookingForm = (props) => {
             <div className="shortInputs">
                 <div className="inputDiv">
                     <label htmlFor="date">Choose date</label>
-                    <input type="date" id="date" name="date" value={date} required onChange={handleDateChange} arial-label="Select a date"/>
+                    {/*<input type="date" id="date" name="date" value={date} required onChange={handleDateChange} arial-label="Select a date"/>*/}
+                    <DatePicker
+                        selected={date}
+                        onChange={handleDateChange} 
+                        className="datePicker"
+                        popperClassName="properDatePicker"
+                     />
                     {(errors.date && errors.date.length>0) && <div className="error">{errors.date}</div>}
                 </div>
                 <div className="inputDiv">

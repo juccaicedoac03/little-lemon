@@ -147,7 +147,6 @@ p {
 }
 
 .main button {
-  width: 200px;
   background-color: #F4CE14;
   border: none;
   font-family: 'Karla', sans-serif;
@@ -164,12 +163,14 @@ p {
 }
 
 #smallButton {
+  width: 200px;
   border-radius: 16px;
   margin: 18px 0;
   height: 50px;
 }
 
 #bigButton {
+  width: 200px;
   border-radius: 8px;
   margin: 18px 0;
   height: 60px;
