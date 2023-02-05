@@ -128,41 +128,59 @@ const BookingForm = (props) => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className={props.className} style={{display: "grid", maxWidth: "200px", gap: "20px"}}>
-            <label htmlFor="firstname">First name</label>
-            <input type="text" id="firstname" name="firstname" value={name} placeholder="Enter your first name" onChange={(e)=>{setName(e.target.value)}} onBlur={handleNameBlur} required arial-label="Enter first name"/>
-            {!isNameValid && (<div className="error">Please enter a first name</div>)}
-            <label htmlFor="lastname">Last name</label>
-            <input type="text" id="lastname" name="lastname" value={lastname} placeholder="Enter your last name" onChange={(e)=>{setLastname(e.target.value)}} onBlur={handleLastnameBlur} required arial-label="Enter last name"/>
-            {!isLastnameValid && (<div className="error">Please enter a last name</div>)}
-            <label htmlFor="email">Email</label>
-            <input type="email" id="email" name="email" value={email} placeholder="example@little-lemon.com" onChange={(e)=>{setEmail(e.target.value)}} onBlur={handleEmailBlur} required arial-label="Enter email"/>
-            {!isEmailValid && (<div className="error">Please enter a valid Email address</div>)}
-            <label htmlFor="numberPhone">Phone number</label>
-            <input type="tel" id="numberPhone" name="numberPhone" pattern="+[0-9]{2,3} [0-9]{10}" placeholder="+57 9120000001" onChange={(e)=>{setPhone(e.target.value)}} onBlur={handlePhoneBlur} required arial-label="Enter number phone"/>
-            {!isPhoneValid && (<div className="error">Please enter a valid phone number</div>)}
-            <label htmlFor="date">Choose date</label>
-            <input type="date" id="date" name="date" value={date} required onChange={handleDateChange} arial-label="Select a date"/>
-            {(errors.date && errors.date.length>0) && <div className="error">{errors.date}</div>}
-            <label htmlFor="time">Choose time</label>
-            <select id="time" type="text" name="time" arial-label="Select a time" value={props.options.selectedTime} required onChange={(e) => {props.dispatch({type: "UPDATE_SELECTED_TIME", time: e.target.value})}}>
-                {props.options.availableTimes.map((time,index) => {
-                    return (
-                        <option key={index} value={time}>{time}</option>
-                    )
-                })}
-            </select>
-            <label htmlFor="guest">Number of guest</label>
-            <input type="number" id="guest" name="guest" value={guests} placeholder="1" min="1" max="10" required onChange={handleGuestsChange} arial-label="Enter number of guests"/>
-            {(errors.guests && errors.guests.length>0) && <div className="error">{errors.guests}</div>}
-            <label htmlFor="occasion">Occasion</label>
-            <select type="text" id="occasion" name="occasion" value={occasion} required onChange={handleOcassionChange} arial-label="Select the occasion">
-                <option value="general">General</option>
-                <option value="birthday">Birthday</option>
-                <option value="anniversary">Anniversary</option>
-                <option value="business">Business</option>
-                <option value="other">Other</option>
-            </select>
+        <form onSubmit={handleSubmit} className={props.className}>
+            <div className="inputDiv">
+                <label htmlFor="firstname">First name</label>
+                <input type="text" id="firstname" name="firstname" value={name} placeholder="Enter your first name" onChange={(e)=>{setName(e.target.value)}} onBlur={handleNameBlur} required arial-label="Enter first name"/>
+                {!isNameValid && (<div className="error">Please enter a first name</div>)}
+            </div>
+            <div className="inputDiv">
+                <label htmlFor="lastname">Last name</label>
+                <input type="text" id="lastname" name="lastname" value={lastname} placeholder="Enter your last name" onChange={(e)=>{setLastname(e.target.value)}} onBlur={handleLastnameBlur} required arial-label="Enter last name"/>
+                {!isLastnameValid && (<div className="error">Please enter a last name</div>)}
+            </div>
+            <div className="inputDiv">
+                <label htmlFor="email">Email</label>
+                <input type="email" id="email" name="email" value={email} placeholder="example@little-lemon.com" onChange={(e)=>{setEmail(e.target.value)}} onBlur={handleEmailBlur} required arial-label="Enter email"/>
+                {!isEmailValid && (<div className="error">Please enter a valid Email address</div>)}
+            </div>
+            <div className="inputDiv">
+                <label htmlFor="numberPhone">Phone number</label>
+                <input type="tel" id="numberPhone" name="numberPhone" pattern="+[0-9]{2,3} [0-9]{10}" placeholder="+57 9120000001" onChange={(e)=>{setPhone(e.target.value)}} onBlur={handlePhoneBlur} required arial-label="Enter number phone"/>
+                {!isPhoneValid && (<div className="error">Please enter a valid phone number</div>)}
+            </div>
+            <div className="shortInputs">
+                <div className="inputDiv">
+                    <label htmlFor="date">Choose date</label>
+                    <input type="date" id="date" name="date" value={date} required onChange={handleDateChange} arial-label="Select a date"/>
+                    {(errors.date && errors.date.length>0) && <div className="error">{errors.date}</div>}
+                </div>
+                <div className="inputDiv">
+                    <label htmlFor="time">Choose time</label>
+                    <select id="time" type="text" name="time" arial-label="Select a time" value={props.options.selectedTime} required onChange={(e) => {props.dispatch({type: "UPDATE_SELECTED_TIME", time: e.target.value})}}>
+                        {props.options.availableTimes.map((time,index) => {
+                            return (
+                                <option key={index} value={time}>{time}</option>
+                            )
+                        })}
+                    </select>
+                </div>
+                <div className="inputDiv">
+                    <label htmlFor="guest">Number of guest</label>
+                    <input type="number" id="guest" name="guest" value={guests} placeholder="1" min="1" max="10" required onChange={handleGuestsChange} arial-label="Enter number of guests"/>
+                    {(errors.guests && errors.guests.length>0) && <div className="error">{errors.guests}</div>}
+                </div>
+                <div className="inputDiv">
+                    <label htmlFor="occasion">Occasion</label>
+                    <select type="text" id="occasion" name="occasion" value={occasion} required onChange={handleOcassionChange} arial-label="Select the occasion">
+                        <option value="general">General</option>
+                        <option value="birthday">Birthday</option>
+                        <option value="anniversary">Anniversary</option>
+                        <option value="business">Business</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+            </div>
             <button type="submit" disabled={validateForm()} value="Make you reservation" aria-label="On Click">Make you reservation</button>
         </form>
     )

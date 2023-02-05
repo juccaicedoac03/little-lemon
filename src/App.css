@@ -109,10 +109,10 @@ p {
 
 .main {
   grid-area: main;
-  height: 1087px;
+  height: fit-content;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 2fr
+  grid-template-rows: 1fr auto;
 }
 
 #promo {

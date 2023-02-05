@@ -1,25 +1,103 @@
 .bookingContainer {
-    background-color: aqua;
     width: 100%;
     display: grid;
+    grid-template-columns: 2fr 3fr;
+    grid-template-rows: 50% 50%;
     grid-template-areas:
         'form tables'
         'form reservations';
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
 }
 
 .form {
+    display: flex;
     grid-area: form;
-    width: 40%;
-    background-color: red;
+    flex-direction: column;
+    gap: 20px;
+    padding-right: 20px;
+    font-family: 'Karla', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
 }
 
+.inputDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.shortInputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+input {
+    height: 35px;
+    font-family: 'Karla', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    border-radius: 8px;
+    background-color: #EDEFEE;
+    border: none;
+    padding-left: 12px;
+    box-sizing: border-box;
+}
+
+input:focus {
+    outline: none;
+    border: 2px solid #495E57;
+  }
+
+select {
+    box-sizing: border-box;
+    border: none;
+    background-color: #EDEFEE;
+    border-color: #EDEFEE;
+    border-radius: 8px;
+    font-family: 'Karla', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    height: 35px;
+    padding-left: 12px;
+}
+
+select:focus {
+    outline: none;
+    border: 2px solid #495E57;
+}
+
+input[type="number"] {
+    box-sizing: border-box;
+    border: none;
+    background-color: #EDEFEE;
+    border-color: #EDEFEE;
+    border-radius: 8px;
+    font-family: 'Karla', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    height: 35px;
+    padding-left: 12px;
+}
+
+input:focus[type="number"] {
+    outline: none;
+    border: 2px solid #495E57;
+  }
+
+input[type="date"] {
+    font-size: 1em;
+    padding: 0.5em;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+
 .tables {
-    background-color: blue;
     grid-area: tables;
-    width: 60%;
 }
 
 .reservations {
-    background-color: green;
     grid-area: reservations;
 }
