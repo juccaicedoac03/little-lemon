@@ -1,9 +1,9 @@
 const Button = ({ value, label, isSelected, onClick }) => (
     <button
-      style={isSelected ? { background: 'blue', color: 'white' } : {}}
+      style={isSelected ? { background: '#495E57', color: 'white' } : {}}
       onClick={() => onClick(value,isSelected)}
     >
-      {label}
+      {label.replace(/-/g, ".  ")}
     </button>
   );
 

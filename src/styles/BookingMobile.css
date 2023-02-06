@@ -1,0 +1,27 @@
+@media (max-width: 600px) {
+    .bookingContainer {
+        width: 100%;
+        display: grid;
+        max-width: 600px;
+        margin: 0 auto;
+        grid-template-areas:
+            'form form form form '
+            'tables tables tables tables'
+            'reservations reservations reservations reservations';
+    }
+
+    .form {
+        display: flex;
+        grid-area: form;
+        padding: 0;
+    }
+
+    .tables {
+        grid-area: tables;
+        width: 100%;
+    }
+
+    .reservations {
+        grid-area: reservations;
+    }
+}

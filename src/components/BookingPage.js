@@ -119,9 +119,9 @@ const BookingPage = (props) => {
     return (
         <main className={props.className}>
             <div className="bookingContainer">
-                <BookingForm className="form" options={options} dispatch={dispatch} submitForm={props.submitForm}/>
-                <BookingSlots className="tables" elements={options.tables[options.selectedTime]} isReserved={false} options={options} dispatch={dispatch}/>
-                <BookingSlots className="reservations" elements={ getReservations(options.selectedTables)} isReserved={true} options={options} dispatch={dispatch}/>
+                <BookingForm className="form" options={options} dispatch={dispatch} submitForm={props.submitForm} tittle={"Booking information"}/>
+                <BookingSlots className="tables" elements={options.tables[options.selectedTime]} isReserved={false} options={options} dispatch={dispatch} tittle={"Select tables"}/>
+                <BookingSlots className="reservations" elements={ getReservations(options.selectedTables)} isReserved={true} options={options} dispatch={dispatch} tittle={"Your tables"} subtittle={"(Click to cancel)"}/>
             </div>
         </main>
     )

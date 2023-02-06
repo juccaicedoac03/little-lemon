@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import './styles/Mobile.css';
 import './styles/Booking.css';
+import './styles/BookingMobile.css';
 import Header from './components/Header';
 import Nav from './components/Nav';
 import Main from './components/Main';

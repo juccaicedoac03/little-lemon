@@ -22,14 +22,17 @@ const BookingSlots = (props) => {
             props.dispatch({type: "UPDATE_SELECTED_TABLE", selectedTable: e, isSelected: isSelected});
         }
     };
-
     return (
-        <div className={props.className} id='bookingSlots'>
-        {(props.elements) && props.elements.map((element,index)=>{
-            return (
-                <Button key={index} value={element} label={element} isSelected={ isSelected(props,element) } onClick={handleClick} />
-            )
-        })}
+        <div>
+            {(props.tittle)&&<div id="tableTittle" ><h2>{props.tittle}</h2></div>}
+            {(props.subtittle)&&<div id="tableSubTittle" ><h5>{props.subtittle}</h5></div>}
+            <div className={props.className} id='bookingSlots'>
+                {(props.elements) && props.elements.map((element,index)=>{
+                    return (
+                        <Button key={index} value={element} label={element} isSelected={ isSelected(props,element) } onClick={handleClick} />
+                    )
+                })}
+            </div>
         </div>
     );
 }

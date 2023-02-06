@@ -45,7 +45,7 @@ const BookingForm = (props) => {
 
         let validDate = true;
         /*if ( new Date(date.replace(/-/g,'/')) < new Date(formatDate(new Date()).replace(/-/g,'/')) ) {*/
-        if ( date < new Date() ) {
+        if ( date.setHours(0, 0, 0, 0) < new Date().setHours(0, 0, 0, 0) ) {
             validDate = false;
         };
 
@@ -99,7 +99,7 @@ const BookingForm = (props) => {
         props.dispatch({type: "UPDATE_TIMES", date: formatDate(date)});
         props.dispatch({type: "UPDATE_AVAILABLE_TIMES", time: props.options.selectedTime, reservations: getReservations(props.options.selectedTables)});
         /*if ( new Date(e.target.value.replace(/-/g,'/')) < new Date(formatDate(new Date()).replace(/-/g,'/')) ) {*/
-        if ( date < new Date() ) {
+        if ( date.setHours(0, 0, 0, 0) < new Date().setHours(0, 0, 0, 0) ) {
             let state = {...errors};
             state["date"] = "Date must be greater or equal than today";
             setErrors(state);
@@ -130,9 +130,11 @@ const BookingForm = (props) => {
         }
         ;
     };
-
     return (
         <form onSubmit={handleSubmit} className={props.className}>
+            <div id="formTittle">
+                <h2>{props.tittle}</h2>
+            </div>
             <div className="inputDiv">
                 <label htmlFor="firstname">First name</label>
                 <input type="text" id="firstname" name="firstname" value={name} placeholder="Enter your first name" onChange={(e)=>{setName(e.target.value)}} onBlur={handleNameBlur} required arial-label="Enter first name"/>
@@ -161,7 +163,9 @@ const BookingForm = (props) => {
                         selected={date}
                         onChange={handleDateChange} 
                         className="datePicker"
-                        popperClassName="properDatePicker"
+                        calendarClassName="custom-calendar"
+                        dayClassName={(date) =>
+                            ((date.getMonth() < new Date().getMonth()) || (date.getMonth() > new Date().getMonth()) )  ? "random" : undefined}
                      />
                     {(errors.date && errors.date.length>0) && <div className="error">{errors.date}</div>}
                 </div>
@@ -191,7 +195,9 @@ const BookingForm = (props) => {
                     </select>
                 </div>
             </div>
-            <button type="submit" disabled={validateForm()} value="Make you reservation" aria-label="On Click">Make you reservation</button>
+            <div className="submitButtom">
+                <button className="submitBottom" type="submit" disabled={validateForm()} value="Make you reservation" aria-label="On Click" style={{backgroundColor: validateForm() ? "#EDEFEE" : undefined, color: validateForm() ? "#BDBDBD" : undefined}}>Make you reservation</button>
+            </div>
         </form>
     )
 }
