@@ -23,7 +23,7 @@ const BookingSlots = (props) => {
         }
     };
     return (
-        <div>
+        <div id="tableContiner">
             {(props.tittle)&&<div id="tableTittle" ><h2>{props.tittle}</h2></div>}
             {(props.subtittle)&&<div id="tableSubTittle" ><h5>{props.subtittle}</h5></div>}
             <div className={props.className} id='bookingSlots'>

@@ -1,6 +1,6 @@
 import BookingForm from "./BookingForm"
 import BookingSlots from "./BookingSlots";
-import { useReducer } from "react";
+import { useReducer, useEffect, useState } from "react";
 import { fetchAPI, genTables, updTables, getReservations, formatDate } from "../api/api";
 /*import { useNavigate } from "react-router-dom";*/
 
@@ -108,20 +108,29 @@ export const updateTimes = (state, action) => {
 const BookingPage = (props) => {
     const init = initializeTimes();
     const [options, dispatch] = useReducer(updateTimes, init);
-    /*const navigate = useNavigate();
+    const [isVisible, setIsVisible] = useState(true);
 
-    const submitForm = (formData) => {
-        if (submitAPI(formData)) {
-            navigate("/confirmation", { state: { reservations: formData } });
-        }
-    }*/
+    const handleResize = () => {
+        if (window.innerWidth <= 600) {
+            setIsVisible(true);
+          } else {
+            setIsVisible(false);
+          }
+    };
+
+    useEffect(() => {
+        window.addEventListener("resize", handleResize);
+        return () => {
+          window.removeEventListener("resize", handleResize);
+        };
+    }, []);
 
     return (
         <main className={props.className}>
             <div className="bookingContainer">
                 <BookingForm className="form" options={options} dispatch={dispatch} submitForm={props.submitForm} tittle={"Booking information"}/>
                 <BookingSlots className="tables" elements={options.tables[options.selectedTime]} isReserved={false} options={options} dispatch={dispatch} tittle={"Select tables"}/>
-                <BookingSlots className="reservations" elements={ getReservations(options.selectedTables)} isReserved={true} options={options} dispatch={dispatch} tittle={"Your tables"} subtittle={"(Click to cancel)"}/>
+                {!isVisible && <BookingSlots className="reservations" elements={ getReservations(options.selectedTables)} isReserved={true} options={options} dispatch={dispatch} tittle={"Your tables"} subtittle={"(Click to cancel)"}/>}
             </div>
         </main>
     )

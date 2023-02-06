@@ -4,21 +4,36 @@
         display: grid;
         max-width: 600px;
         margin: 0 auto;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
         grid-template-areas:
-            'form form form form '
-            'tables tables tables tables'
-            'reservations reservations reservations reservations';
+            'form'
+            'tables'
     }
 
     .form {
         display: flex;
         grid-area: form;
         padding: 0;
+        height: fit-content;
     }
 
     .tables {
         grid-area: tables;
-        width: 100%;
+        padding: 0;
+        align-items: center;
+        align-content: center;
+    }
+
+    #tableTittle h2 {
+        margin-top: 20px;
+        margin-bottom: 5px;
+        padding: 0px;
+    }
+
+    .tableContiner {
+        display: flex;
+        padding: 0;
     }
 
     .reservations {
