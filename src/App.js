@@ -6,6 +6,10 @@ import './styles/BookingMobile.css';
 import Header from './components/Header';
 import Nav from './components/Nav';
 import Main from './components/Main';
+import About from './components/About';
+import Menu from './components/Menu';
+import Order from './components/Order';
+import Login from './components/Login';
 import BookingPage from './components/BookingPage';
 import ConfirmedBooking from './components/ConfirmedBooking';
 import Footer from './components/Footer';
@@ -39,8 +43,12 @@ function App() {
       <Nav className="nav"/>
       <Routes>
         <Route path='/' element={<Main className="main" handleClick={redirectBooking}/>}/>
+        <Route path='/about' element={<About className="main"/>}/>
+        <Route path='/menu' element={<Menu className="main"/>}/>
         <Route path='/reservation' element={<BookingPage className="main" submitForm={submitForm}/>}/>
         <Route path='/confirmation' element={<ConfirmedBooking handleClick={redirectHome} redirectReservation={redirectReservation}/>}/>
+        <Route path='/order' element={<Order className="main"/>}/>
+        <Route path='/login' element={<Login className="main"/>}/>
       </Routes>
       <Footer className="footer"/>
     </div>

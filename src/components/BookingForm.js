@@ -151,6 +151,7 @@ const BookingForm = (props) => {
         }
         ;
     };
+    console.log(email)
     return (
         <form onSubmit={handleSubmit} className={props.className}>
             <div id="formTittle">

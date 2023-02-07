@@ -111,6 +111,29 @@ p {
   margin-right: 0;
 }
 
+.nav ul li a {
+  transition: all 0.3s ease-out;
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.nav ul li a:before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: currentColor;
+  width: 0;
+  height: 2px;
+  transition: width 0.3s ease-out;
+}
+
+.nav ul li a:hover:before {
+  width: 100%;
+}
+
 .main {
   grid-area: main;
   height: fit-content;
@@ -208,4 +231,17 @@ p {
 .footer img {
   width: 20px;
   height: 20px;
+}
+
+#granMessageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+#messageContainer {
+  width: fit-content;
 }
