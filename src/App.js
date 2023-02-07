@@ -21,12 +21,16 @@ function App() {
         navigate("/confirmation", { state: { reservations: formData } });
     }
   }
+
+  const redirectBooking = () => {
+    navigate("/reservation");
+  }
   return (
     <div className='container'>
       <Header className="header"/>
       <Nav className="nav"/>
       <Routes>
-        <Route path='/' element={<Main className="main"/>}/>
+        <Route path='/' element={<Main className="main" handleClick={redirectBooking}/>}/>
         <Route path='/reservation' element={<BookingPage className="main" submitForm={submitForm}/>}/>
         <Route path='/confirmation' element={<ConfirmedBooking/>}/>
       </Routes>

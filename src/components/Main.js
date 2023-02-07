@@ -60,7 +60,7 @@ const Main = (props) => {
                         We are a family owned Mediterranean restaurant, focused on traditional 
                         recipes served with a modern twist.
                     </p>
-                    <button id="smallButton">Reserve a table</button>
+                    <button id="smallButton" onClick={props.handleClick}>Reserve a table</button>
                 </article>
                 <img src={Restaurant} alt="Restaurant"/>
             </div>
