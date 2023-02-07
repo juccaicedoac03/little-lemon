@@ -100,5 +100,18 @@
         font-weight: 500;
     }
 
+    #confirmationHeader h1 {
+        font-size: 45px;
+    }
+
+    #confirmationHeader h3 {
+        font-size: 25px;
+        margin-top: -15px;
+    }
+
+    #confirmationContainer {
+        width: 100%;
+    }
+
 
 }

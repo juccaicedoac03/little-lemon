@@ -282,6 +282,12 @@ input:focus[type="number"] {
     padding: 0px 10px 10px 10px;
 }
 
+#confirmationMain {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 #confirmationHeader h3 {
     font-family: 'Markazi Text', serif;
     font-weight: 400;
