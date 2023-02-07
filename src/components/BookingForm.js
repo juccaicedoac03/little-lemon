@@ -2,7 +2,6 @@ import { useState } from "react";
 import { getReservations, formatDate } from "../api/api";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-/*import { useNavigate } from "react-router-dom";*/
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
@@ -17,11 +16,9 @@ const BookingForm = (props) => {
     const [isEmailValid, setIsEmailValid] = useState(true);
     const [isPhoneValid, setIsPhoneValid] = useState(true);
     const [date, setDate] = useState( new Date() );
-    /*const [startDate, setStartDate] = useState(new Date());*/
     const [guests, setGuests] = useState(1);
     const [occasion, setOccasion] = useState("general");
     const [errors, setErrors] = useState({});
-    /*const navigate = useNavigate();*/
 
     const validateForm = () => {
 
@@ -46,7 +43,6 @@ const BookingForm = (props) => {
         };
 
         let validDate = true;
-        /*if ( new Date(date.replace(/-/g,'/')) < new Date(formatDate(new Date()).replace(/-/g,'/')) ) {*/
         if ( date.setHours(0, 0, 0, 0) < new Date().setHours(0, 0, 0, 0) ) {
             validDate = false;
         };
@@ -68,11 +64,6 @@ const BookingForm = (props) => {
     const MySwal = withReactContent(Swal)
     const handleSubmit = (e) => {
         e.preventDefault();
-        /*if (submitAPI(e)) {
-            alert("Account created!");
-            navigate("/confirmation", { state: { reservations: props.options.reservationList } });
-        }*/
-        /*alert("Account created!");*/
         MySwal.fire({
             icon: 'success',
             title: 'Successfully booked',
@@ -119,7 +110,6 @@ const BookingForm = (props) => {
         setDate(date);
         props.dispatch({type: "UPDATE_TIMES", date: formatDate(date)});
         props.dispatch({type: "UPDATE_AVAILABLE_TIMES", time: props.options.selectedTime, reservations: getReservations(props.options.selectedTables)});
-        /*if ( new Date(e.target.value.replace(/-/g,'/')) < new Date(formatDate(new Date()).replace(/-/g,'/')) ) {*/
         if ( date.setHours(0, 0, 0, 0) < new Date().setHours(0, 0, 0, 0) ) {
             let state = {...errors};
             state["date"] = "Date must be greater or equal than today";
@@ -129,7 +119,6 @@ const BookingForm = (props) => {
             state["date"] = "";
             setErrors(state);
         };
-        /*e.target.blur();*/
     };
 
     const handleOcassionChange = (e) => {
