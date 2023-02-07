@@ -1,6 +1,6 @@
 import BookingForm from "./BookingForm"
 import BookingSlots from "./BookingSlots";
-import { useReducer, useEffect, useState } from "react";
+import { useReducer } from "react";
 import { fetchAPI, genTables, updTables, getReservations, formatDate } from "../api/api";
 
 
@@ -44,7 +44,6 @@ export const updateTimes = (state, action) => {
             for (let res of action.reservations) {
                 let reserved = res.split("-");
                 count[reserved[0]+"-"+reserved[1]] = (count[reserved[0]+"-"+reserved[1]] || 0) + 1;
-                console.log(count,Object.keys(state.tables[reserved[1]]).length)
                 if ((reserved[0].toString() === state.selectedDate.replace(/-/g,'/').toString()) && (count[reserved[0]+"-"+reserved[1]] === Object.keys(state.tables[reserved[1]]).length )) {
                     let index = state.availableTimes.findIndex(item => item.toString() === reserved[1],toString());
                     if (index !== -1) {
@@ -107,28 +106,7 @@ export const updateTimes = (state, action) => {
 const BookingPage = (props) => {
     const init = initializeTimes();
     const [options, dispatch] = useReducer(updateTimes, init);
-    const [isVisible, setIsVisible] = useState(null);
 
-    const handleResize = () => {
-        if (window.innerWidth <= 600) {
-            setIsVisible(false);
-          } else {
-            setIsVisible(true);
-          }
-    };
-
-    useEffect(() => {
-        if (window.innerWidth <= 600) {
-            setIsVisible(false);
-        } else {
-            setIsVisible(true);
-        }
-        window.addEventListener("resize", handleResize);
-        return () => {
-          window.removeEventListener("resize", handleResize);
-        };
-    }, []);
-    console.log(isVisible)
     return (
         <main className={props.className}>
             <div className="bookingContainer">

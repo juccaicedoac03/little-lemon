@@ -1,8 +1,48 @@
 import { useLocation } from "react-router-dom";
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
-const ConfirmedBooking = () => {
+const ConfirmedBooking = (props) => {
     const location = useLocation();
-    console.log(location.state.reservations.formData)
+    const MySwal = withReactContent(Swal);
+    const handleClick = (e) => {
+        /*MySwal.fire({
+            icon: 'success',
+            title: 'Successfully booked',
+            confirmButtonText: "Ok",
+            confirmButtonColor: "#F4CE14",
+            customClass: {
+                confirmButton: 'alert'
+            }
+          })*/
+        MySwal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#F4CE14',
+        cancelButtonColor: '#e7956f',
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No',
+        customClass: {
+            confirmButton: 'alert'
+        }
+        }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                icon: 'success',
+                text: 'Reservation canceled successfully!',
+                confirmButtonColor: '#F4CE14',
+                customClass: {
+                    confirmButton: 'alert'
+                }
+            }
+            ).then(()=>{
+                props.redirectReservation();
+            })
+        }
+        })
+    };
     return (
         <div className="main">
             <div id="confirmationMain">
@@ -29,6 +69,10 @@ const ConfirmedBooking = () => {
                             </div>
                         );
                     }) }
+                </div>
+                <div id="buttonConfirmation">
+                    <button id="cancelReservation" onClick={handleClick} >Cancel reservation</button>
+                    <button id="goHome" onClick={props.handleClick} >Go to home</button>
                 </div>
             </div>
         </div>

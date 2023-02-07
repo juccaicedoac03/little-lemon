@@ -286,6 +286,8 @@ input:focus[type="number"] {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 #confirmationHeader h3 {
@@ -335,4 +337,37 @@ input:focus[type="number"] {
 #confirmedInformation h5 {
     font-weight: 500;
     font-size: 16px;
+}
+
+.alert {
+    color: #333333 !important;
+    border: 0px;
+    border-radius: 16px;
+}
+
+#buttonConfirmation {
+    margin: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#buttonConfirmation button {
+    width: 200px;
+    border-radius: 16px;
+    margin: 5px 5px;
+    height: 50px;
+    cursor: pointer;
+  }
+
+#cancelReservation {
+    background-color: #EE9972;
+    color: #333333;
+}
+
+#cancelReservation:hover {
+    background-color: #e7956f;
+}
+
+#cancelReservation:active {
+    background-color: #db8c68;
 }

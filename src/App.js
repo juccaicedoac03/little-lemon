@@ -25,14 +25,22 @@ function App() {
   const redirectBooking = () => {
     navigate("/reservation");
   }
+
+  const redirectHome = () => {
+    navigate("/");
+  }
+
+  const redirectReservation = () => {
+    navigate("/reservation");
+  }
   return (
     <div className='container'>
-      <Header className="header"/>
+      <Header className="header" handleClick={redirectHome}/>
       <Nav className="nav"/>
       <Routes>
         <Route path='/' element={<Main className="main" handleClick={redirectBooking}/>}/>
         <Route path='/reservation' element={<BookingPage className="main" submitForm={submitForm}/>}/>
-        <Route path='/confirmation' element={<ConfirmedBooking/>}/>
+        <Route path='/confirmation' element={<ConfirmedBooking handleClick={redirectHome} redirectReservation={redirectReservation}/>}/>
       </Routes>
       <Footer className="footer"/>
     </div>

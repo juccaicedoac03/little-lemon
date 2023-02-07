@@ -26,7 +26,7 @@ const Header = (props) => {
 
     return (
         <header className={props.className}>
-            <img src={Logo} alt="Company logo"/>
+            <img onClick={props.handleClick} src={Logo} alt="Company logo"/>
             {isVisible && <img src={Basket} alt="Basket"/>}
         </header>
     );

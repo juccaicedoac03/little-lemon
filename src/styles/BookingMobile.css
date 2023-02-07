@@ -113,5 +113,24 @@
         width: 100%;
     }
 
+    #buttonConfirmation {
+        margin: 5px;
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    #buttonConfirmation button {
+        width: 48%;
+        border-radius: 16px;
+        margin: 5px 0px;
+        height: 50px;
+        cursor: pointer;
+      }
+    
+    #confirmationMain {
+        width: 100%;
+        flex-wrap: nowrap;
+    }
 
 }

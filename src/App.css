@@ -80,6 +80,10 @@ p {
   width: 162px;
 }
 
+.header img {
+  cursor: pointer;
+}
+
 .nav {
   grid-area: nav;
   display: flex;

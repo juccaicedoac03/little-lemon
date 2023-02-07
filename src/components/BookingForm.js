@@ -3,6 +3,8 @@ import { getReservations, formatDate } from "../api/api";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 /*import { useNavigate } from "react-router-dom";*/
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 const BookingForm = (props) => {
 
@@ -63,22 +65,33 @@ const BookingForm = (props) => {
         return (!validName || !validLastname || !validPhone || !validEmail || !validDate || !validGuests || !validReservations)
     };
 
+    const MySwal = withReactContent(Swal)
     const handleSubmit = (e) => {
         e.preventDefault();
         /*if (submitAPI(e)) {
             alert("Account created!");
             navigate("/confirmation", { state: { reservations: props.options.reservationList } });
         }*/
-        alert("Account created!");
-        props.submitForm({
-            options:props.options.reservationList,
-            formData: {
-                firstName: name,
-                lastName: lastname,
-                email: email,
-                phone: phone,
+        /*alert("Account created!");*/
+        MySwal.fire({
+            icon: 'success',
+            title: 'Successfully booked',
+            confirmButtonText: "Ok",
+            confirmButtonColor: "#F4CE14",
+            customClass: {
+                confirmButton: 'alert'
             }
-        });
+          }).then( ()=> {
+            props.submitForm({
+                options:props.options.reservationList,
+                formData: {
+                    firstName: name,
+                    lastName: lastname,
+                    email: email,
+                    phone: phone,
+                }
+            })}
+          )
     };
 
     const handleNameBlur = (e) => {
