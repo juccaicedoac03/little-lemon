@@ -2,7 +2,6 @@ import BookingForm from "./BookingForm"
 import BookingSlots from "./BookingSlots";
 import { useReducer, useEffect, useState } from "react";
 import { fetchAPI, genTables, updTables, getReservations, formatDate } from "../api/api";
-/*import { useNavigate } from "react-router-dom";*/
 
 
 export const initializeTimes = () => {
@@ -108,29 +107,34 @@ export const updateTimes = (state, action) => {
 const BookingPage = (props) => {
     const init = initializeTimes();
     const [options, dispatch] = useReducer(updateTimes, init);
-    const [isVisible, setIsVisible] = useState(true);
+    const [isVisible, setIsVisible] = useState(null);
 
     const handleResize = () => {
         if (window.innerWidth <= 600) {
-            setIsVisible(true);
-          } else {
             setIsVisible(false);
+          } else {
+            setIsVisible(true);
           }
     };
 
     useEffect(() => {
+        if (window.innerWidth <= 600) {
+            setIsVisible(false);
+        } else {
+            setIsVisible(true);
+        }
         window.addEventListener("resize", handleResize);
         return () => {
           window.removeEventListener("resize", handleResize);
         };
     }, []);
-
+    console.log(isVisible)
     return (
         <main className={props.className}>
             <div className="bookingContainer">
                 <BookingForm className="form" options={options} dispatch={dispatch} submitForm={props.submitForm} tittle={"Booking information"}/>
-                <BookingSlots className="tables" elements={options.tables[options.selectedTime]} isReserved={false} options={options} dispatch={dispatch} tittle={"Select tables"}/>
-                {!isVisible && <BookingSlots className="reservations" elements={ getReservations(options.selectedTables)} isReserved={true} options={options} dispatch={dispatch} tittle={"Your tables"} subtittle={"(Click to cancel)"}/>}
+                <BookingSlots className="tables" elements={options.tables[options.selectedTime]} isReserved={false} options={options} dispatch={dispatch} tittle={"Select tables"} isDeletable={false}/>
+                <BookingSlots className="reservations" elements={ getReservations(options.selectedTables)} isReserved={true} options={options} dispatch={dispatch} tittle={"Your tables"} isDeletable={true}/>
             </div>
         </main>
     )

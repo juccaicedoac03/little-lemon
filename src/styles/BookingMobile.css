@@ -1,11 +1,18 @@
 @media (max-width: 600px) {
+
+    .main {
+        min-width: 100%;
+      }
+
     .bookingContainer {
         width: 100%;
         display: grid;
-        max-width: 600px;
         margin: 0 auto;
         grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1fr;
+        grid-template-rows: 1fr auto;
+        height: fit-content;
+        min-height: fit-content;
+        min-width: 100%;
         grid-template-areas:
             'form'
             'tables'
@@ -16,13 +23,24 @@
         grid-area: form;
         padding: 0;
         height: fit-content;
+        min-width: 100%;
+    }
+
+    .custom-calendar .react-datepicker__navigation {
+        background-color: white;
+        border-radius: 50%;
+        margin: 0 15px 0 15px;
+        width: 30px;
     }
 
     .tables {
         grid-area: tables;
         padding: 0;
         align-items: center;
-        align-content: center;
+    }
+
+    .tables button {
+        width: fit-content;
     }
 
     #tableTittle h2 {
@@ -31,12 +49,56 @@
         padding: 0px;
     }
 
-    .tableContiner {
-        display: flex;
+    #tableContiner {
+        
         padding: 0;
+        min-width: 100%;
     }
 
     .reservations {
         grid-area: reservations;
+        min-width: 90%;
+        display: inline-block;
+        padding: 0;
     }
+    .reservations button {
+        margin: 0;
+    }
+
+    .submitButtomDiv {
+        position: relative;
+        width: 90%;
+    }
+
+    .submitButtomDiv button {
+        position: fixed;
+        left: 5%;
+        bottom: 0;
+        margin-bottom: 15px;
+        box-shadow: 0 15px 20px 15px white;
+        min-width: 90%;
+        width: 90%;
+    }
+
+    .cardTables {
+        width: 100%;
+        margin: 0;
+        padding: 0%;
+        height: 85px;
+        border-radius: 0%;
+        border: none;
+        border-bottom: 1px solid #EDEFEE;
+    }
+
+    #cardTablesTittle {
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    #cardTablesContent {
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+
 }

@@ -13,12 +13,11 @@ export const genTables = function (date, times) {
 
     let x = Array.from(date.getDate().toString(), Number).reduce((a, b) => a + b, 0);
     if (x<8){
-        x += 10;
+        x = x+10;
     }
 
     let tables = [];
-
-    for (let i = 0; tables.length<x; i++) {
+    for (let i = 0; i<x; i++) {
         let randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
             if ( !tables.includes("Table "+randomNumber) ){
                 tables.push("Table "+randomNumber);
@@ -67,9 +66,8 @@ export const formatDate = (date) => {
 };
 
 export const fetchAPI = function(date) {
-    let result = [];
+    const result = [];
     let random = seededRandom(date.getDate());
-
     for(let i = 17; i <= 23; i++) {
         if(random() < 0.5) {
             result.push(i + ':00');
@@ -80,6 +78,7 @@ export const fetchAPI = function(date) {
     }
     return result;
 };
+
 export const submitAPI = function(formData) {
     return true;
 };

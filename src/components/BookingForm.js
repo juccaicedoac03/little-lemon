@@ -70,7 +70,15 @@ const BookingForm = (props) => {
             navigate("/confirmation", { state: { reservations: props.options.reservationList } });
         }*/
         alert("Account created!");
-        props.submitForm(props.options.reservationList);
+        props.submitForm({
+            options:props.options.reservationList,
+            formData: {
+                firstName: name,
+                lastName: lastname,
+                email: email,
+                phone: phone,
+            }
+        });
     };
 
     const handleNameBlur = (e) => {
@@ -195,8 +203,8 @@ const BookingForm = (props) => {
                     </select>
                 </div>
             </div>
-            <div className="submitButtom">
-                <button className="submitBottom" type="submit" disabled={validateForm()} value="Make you reservation" aria-label="On Click" style={{backgroundColor: validateForm() ? "#EDEFEE" : undefined, color: validateForm() ? "#BDBDBD" : undefined}}>Make you reservation</button>
+            <div className="submitButtomDiv">
+                <button className="submitButtom" type="submit" disabled={validateForm()} value="Make you reservation" aria-label="On Click" style={{backgroundColor: validateForm() ? "#EE9972" : undefined, color: validateForm() ? "#333333" : undefined}}>Make you reservation</button>
             </div>
         </form>
     )
